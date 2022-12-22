@@ -1,5 +1,6 @@
-import { NavigationContainer } from '@react-navigation/native'
 import * as Linking from 'expo-linking'
+
+import { NavigationContainer } from '@react-navigation/native'
 import { useMemo } from 'react'
 
 export function NavigationProvider({
@@ -17,6 +18,7 @@ export function NavigationProvider({
             screens: {
               home: '',
               'user-detail': 'user/:id',
+              'user-profile': 'user-profile'
             },
           },
         }),

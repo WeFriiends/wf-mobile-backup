@@ -4,12 +4,25 @@
     "slug": "solito-blank",
     "version": "1.0.0",
     "scheme": "solito-blank",
+    "plugins": [
+        [
+          "expo-image-picker",
+          {
+            "photosPermission": "custom photos permission",
+            "cameraPermission": "Allow $(PRODUCT_NAME) to open the camera",
+  
+            "//": "Disables the microphone permission",
+            "microphonePermission": false
+          }
+        ]
+      ],
     "platforms": [
       "ios",
       "android"
     ],
     "ios": {
       "bundleIdentifier": "com.solito.blank"
+      
     }
   }
 }
