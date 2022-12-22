@@ -2,12 +2,12 @@ WeFriiendsMobile
 # This branch is for getting familiar with the structure of the mobile project
 
 I added several folders to the project under packages/app directory:
- components -  react components
+  - components -  react components
   - api - api requests
   - lib - libraries and utils, and other staff that doesn't fall into existing categories
   - types - custom typescript types
   - The names of the files and components are not final, I will revisit and refactor it
-
+   
 # Blank Solito Example Monorepo 🕴
 
 ```sh
