@@ -1,13 +1,15 @@
 import { HomeScreen } from '../../features/home/screen'
-import ProfileScreen from 'app/features/user/profile-screen';
+import RegistrationScreen from '../../features/registration'
+import ProfileScreen from 'app/features/user/profile-screen'
 import { UserDetailScreen } from '../../features/user/detail-screen'
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 const Stack = createNativeStackNavigator<{
   home: undefined
   'user-detail': {
     id: string
   }
+  registration: undefined
   'user-profile': {
     id: string
   }
@@ -21,6 +23,13 @@ export function NativeNavigation() {
         component={HomeScreen}
         options={{
           title: 'Home',
+        }}
+      />
+      <Stack.Screen
+        name="registration"
+        component={RegistrationScreen}
+        options={{
+          title: 'Registration',
         }}
       />
       <Stack.Screen

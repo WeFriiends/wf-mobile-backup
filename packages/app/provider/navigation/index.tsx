@@ -17,8 +17,9 @@ export function NavigationProvider({
             initialRouteName: 'home',
             screens: {
               home: '',
+              registration: 'registration',
               'user-detail': 'user/:id',
-              'user-profile': 'user-profile'
+              'user-profile': 'user-profile',
             },
           },
         }),
