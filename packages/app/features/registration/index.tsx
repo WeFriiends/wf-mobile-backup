@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { StyleSheet, TextInput, Image } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
 import { createParam } from 'solito'
 import AddDateOfBirth from 'app/components/profileBuilder/AddDateOfBirth'
@@ -22,16 +22,10 @@ const RegistrationScreen = () => {
         flex: 1,
       }}
     >
-      <View
-        style={{
-          height: 80,
-          marginTop: 30,
-          overflow: 'hidden',
-        }}
-      >
+      <View style={styles.logoView}>
         <Logo />
       </View>
-      <View style={styles.registerSourceStyle}>
+      {/* <View style={styles.registerSourceStyle}>
         <Image
           source={{
             uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/input_username.png',
@@ -43,11 +37,11 @@ const RegistrationScreen = () => {
           placeholder="Enter Your Name Here"
           underlineColorAndroid="transparent"
         />
-      </View>
+      </View> */}
 
       <View>
-        <Prompt text={'New here?'} />
-        <Prompt text={'Create an account'} />
+        <Text>New here?</Text>
+        <Text>Create an account</Text>
       </View>
       <View>
         <Prompt
@@ -75,6 +69,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: 10,
+  },
+  logoView: {
+    height: 80,
+    marginTop: 30,
+    overflow: 'hidden',
   },
   registerSourceStyle: {
     flexDirection: 'row',

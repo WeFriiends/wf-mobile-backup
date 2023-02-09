@@ -7,6 +7,9 @@ const theme = makeTheme({
       fontSize: 16,
     },
   },
+  colors: {
+    $background: 'black',
+  },
 })
 
 export function Dripsy({ children }: { children: React.ReactNode }) {
