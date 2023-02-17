@@ -4,8 +4,8 @@ import { Avatar, Button, Card, Text } from 'react-native-paper'
 
 const MailRegistration = () => {
   return (
-    <View>
-      <Card onPress={() => console.log('FB')} style={styles.cardContainer}>
+    <View style={styles.viewContainer}>
+      <Card onPress={() => console.log('mail')} style={styles.cardContainer}>
         <Card.Content>
           <Text variant="bodyMedium">e-mail</Text>
         </Card.Content>
@@ -15,8 +15,13 @@ const MailRegistration = () => {
 }
 
 const styles = StyleSheet.create({
+  viewContainer: {
+    paddingBottom: 20,
+  },
   cardContainer: {
     backgroundColor: '#FFF1EC',
+    boxShadow: 'none',
+    alignItems: 'center',
   },
 })
 

@@ -4,10 +4,14 @@ import { Avatar, Button, Card, Text } from 'react-native-paper'
 
 const GoogleRegistration = () => {
   return (
-    <View>
+    <View style={styles.viewContainer}>
       <Card onPress={() => console.log('FB')} style={styles.cardContainer}>
-        <Card.Content>
-          {/* <Avatar.Image size={24} source={require('../public/facebook.png')} /> */}
+        <Card.Content style={styles.cardContent}>
+          <Avatar.Image
+            style={styles.image}
+            size={24}
+            source={require('../../../public/google.png')}
+          />
           <Text variant="bodyMedium">Google</Text>
         </Card.Content>
       </Card>
@@ -16,8 +20,21 @@ const GoogleRegistration = () => {
 }
 
 const styles = StyleSheet.create({
+  viewContainer: {
+    paddingBottom: 20,
+  },
   cardContainer: {
     backgroundColor: '#FFF1EC',
+    boxShadow: 'none',
+    alignItems: 'center',
+  },
+  cardContent: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  image: {
+    marginRight: 5,
+    backgroundColor: 'unset',
   },
 })
 

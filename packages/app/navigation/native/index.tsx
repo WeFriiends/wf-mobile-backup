@@ -1,5 +1,5 @@
 import { HomeScreen } from '../../features/home/screen'
-import RegistrationScreen from '../../features/registration'
+import RegistrationOptionsScreen from '../../features/registration/RegistrationOptionsScreen'
 import ProfileScreen from 'app/features/user/profile-screen'
 import { UserDetailScreen } from '../../features/user/detail-screen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -10,6 +10,9 @@ const Stack = createNativeStackNavigator<{
     id: string
   }
   registration: undefined
+  'choose-acc': {
+    acc: string
+  }
   'user-profile': {
     id: string
   }
@@ -27,9 +30,16 @@ export function NativeNavigation() {
       />
       <Stack.Screen
         name="registration"
-        component={RegistrationScreen}
+        component={RegistrationOptionsScreen}
         options={{
           title: 'Registration',
+        }}
+      />
+      <Stack.Screen
+        name="choose-acc"
+        component={RegistrationOptionsScreen}
+        options={{
+          title: 'ChooseAcc',
         }}
       />
       <Stack.Screen
