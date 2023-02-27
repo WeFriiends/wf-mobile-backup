@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
+import { SolitoImage } from 'solito/image'
 import Logo from 'app/components/Logo'
 import { Avatar, Button, Card, Text, TextInput } from 'react-native-paper'
 import FbRegistration from './fb/FbRegistration'
@@ -15,6 +16,14 @@ const GladScreen = () => {
         flex: 1,
       }}
     >
+      <SolitoImage
+        src="/account-header.svg"
+        height={100}
+        width={100}
+        alt=""
+        style={undefined}
+        resizeMode={'cover'}
+      />
       <View style={styles.logoView}>
         <Logo />
       </View>
@@ -24,8 +33,6 @@ const GladScreen = () => {
             Glad you're here! Hope, you'll enjoy!
           </Text>
         </View>
-        <View style={styles.emptyContainer}></View>
-        <View style={styles.signContainer}></View>
       </View>
     </View>
   )
@@ -35,29 +42,10 @@ const styles = StyleSheet.create({
   registrationContainer: {
     margin: 20,
   },
-  textBlock: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingBottom: 50,
-  },
-  coloredText: {
-    color: '#F46B5D',
-  },
   logoView: {
     height: 80,
     marginTop: 30,
     overflow: 'hidden',
-  },
-  signContainer: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  emptyContainer: {
-    minHeight: '15%',
-    maxHeight: '30%',
-  },
-  signText: {
-    color: '#1D878C',
   },
 })
 

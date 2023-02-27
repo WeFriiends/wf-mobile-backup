@@ -10,7 +10,7 @@ const FbRegistration = () => {
           <Avatar.Image
             style={styles.image}
             size={24}
-            source={require('../../../public/facebook.png')}
+            source={require('public/facebook.png')}
           />
           <Text variant="bodyMedium">Facebook</Text>
         </Card.Content>

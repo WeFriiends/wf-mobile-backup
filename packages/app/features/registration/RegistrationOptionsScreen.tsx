@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
+import { TextLink } from 'solito/link'
 import Logo from 'app/components/Logo'
 import { Avatar, Button, Card, Text, TextInput } from 'react-native-paper'
 import FbRegistration from './fb/FbRegistration'
@@ -39,9 +40,11 @@ const RegistrationOptionsScreen = () => {
         <View style={styles.emptyContainer}></View>
         <View style={styles.signContainer}>
           <Text variant="titleLarge">Already have an account</Text>
-          <Text style={styles.signText} variant="titleLarge">
-            Sign in
-          </Text>
+          <TextLink href="/">
+            <Text style={styles.signText} variant="titleLarge">
+              Sign in
+            </Text>
+          </TextLink>
         </View>
       </View>
     </View>

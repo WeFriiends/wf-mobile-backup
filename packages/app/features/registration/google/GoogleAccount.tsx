@@ -4,7 +4,7 @@ import { View } from 'dripsy'
 import Logo from 'app/components/Logo'
 import { Avatar, Button, Card, Text, TextInput } from 'react-native-paper'
 
-const FbAccount = () => {
+const GoogleAccount = () => {
   return (
     <View
       style={{
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default FbAccount
+export default GoogleAccount
