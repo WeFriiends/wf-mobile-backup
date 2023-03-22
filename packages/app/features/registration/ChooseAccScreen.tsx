@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
-import Logo from 'app/components/Logo'
-import { Avatar, Button, Card, Text, TextInput } from 'react-native-paper'
-import FbAccount from './fb/FbAccount'
-import GoogleRegistration from './google/GoogleRegistration'
 import { createParam } from 'solito'
+import { Avatar, Button, Card, Text, TextInput } from 'react-native-paper'
+import Logo from 'app/components/Logo'
+import ChooseFbAccount from './fb/ChooseFbAccount'
+import GoogleRegistration from './google/GoogleOption'
+import SetMail from './email/MailCreds'
 
 const ChooseAccScreen = () => {
   return (
@@ -19,12 +20,13 @@ const ChooseAccScreen = () => {
         <Logo />
       </View>
       <View style={styles.registrationContainer}>
+        <SetMail />
         <View>
           <Text style={styles.coloredText} variant="headlineMedium">
             Choose an account
           </Text>
         </View>
-        <FbAccount />
+        <ChooseFbAccount />
       </View>
     </View>
   )

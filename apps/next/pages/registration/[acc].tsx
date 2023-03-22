@@ -1,3 +1,3 @@
-import ChooseAccScreen from 'app/features/registration/ChooseAccScreen'
+import MailCreds from 'app/features/registration/email/MailCreds'
 
-export default ChooseAccScreen
+export default MailCreds

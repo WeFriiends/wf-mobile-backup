@@ -4,9 +4,9 @@ import { View } from 'dripsy'
 import { TextLink } from 'solito/link'
 import Logo from 'app/components/Logo'
 import { Avatar, Button, Card, Text, TextInput } from 'react-native-paper'
-import FbRegistration from './fb/FbRegistration'
-import GoogleRegistration from './google/GoogleRegistration'
-import MailRegistration from './email/MailRegistration'
+import FbOption from './fb/FbOption'
+import GoogleOption from './google/GoogleOption'
+import MailOption from './email/MailOption'
 
 const RegistrationOptionsScreen = () => {
   return (
@@ -27,9 +27,9 @@ const RegistrationOptionsScreen = () => {
           <Text variant="titleLarge">Create an account</Text>
         </View>
         <View>
-          <FbRegistration />
-          <GoogleRegistration />
-          <MailRegistration />
+          <FbOption />
+          <GoogleOption />
+          <MailOption />
         </View>
         <View>
           <Text variant="titleMedium">

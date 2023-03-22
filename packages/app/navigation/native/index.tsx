@@ -1,5 +1,7 @@
 import { HomeScreen } from '../../features/home/screen'
 import RegistrationOptionsScreen from '../../features/registration/RegistrationOptionsScreen'
+import MailCreds from '../../features/registration/email/MailCreds'
+import GladScreen from '../../features/registration/GladScreen'
 import ProfileScreen from 'app/features/user/profile-screen'
 import { UserDetailScreen } from '../../features/user/detail-screen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -10,9 +12,10 @@ const Stack = createNativeStackNavigator<{
     id: string
   }
   registration: undefined
-  'choose-acc': {
+  'mail-sign': {
     acc: string
   }
+  'glad-screen': undefined
   'user-profile': {
     id: string
   }
@@ -36,10 +39,17 @@ export function NativeNavigation() {
         }}
       />
       <Stack.Screen
-        name="choose-acc"
-        component={RegistrationOptionsScreen}
+        name="mail-sign"
+        component={MailCreds}
         options={{
-          title: 'ChooseAcc',
+          title: 'MailSign',
+        }}
+      />
+      <Stack.Screen
+        name="glad-screen"
+        component={GladScreen}
+        options={{
+          title: 'GladScreen',
         }}
       />
       <Stack.Screen

@@ -1,13 +1,17 @@
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
 import { Avatar, Button, Card, Text } from 'react-native-paper'
+import { TextLink } from 'solito/link'
+import { googleSignIn } from '../../../actions/registration/fetchGoogleAcc'
 
-const MailRegistration = () => {
+const MailOption = () => {
   return (
     <View style={styles.viewContainer}>
-      <Card onPress={() => console.log('mail')} style={styles.cardContainer}>
+      <Card style={styles.cardContainer}>
         <Card.Content>
-          <Text variant="bodyMedium">e-mail</Text>
+          <TextLink href="/registration/mail-sign">
+            <Text variant="bodyMedium">e-mail</Text>
+          </TextLink>
         </Card.Content>
       </Card>
     </View>
@@ -22,7 +26,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF1EC',
     boxShadow: 'none',
     alignItems: 'center',
+    cursor: 'pointer',
   },
 })
 
-export default MailRegistration
+export default MailOption

@@ -4,9 +4,9 @@ import { View } from 'dripsy'
 import { SolitoImage } from 'solito/image'
 import Logo from 'app/components/Logo'
 import { Avatar, Button, Card, Text, TextInput } from 'react-native-paper'
-import FbRegistration from './fb/FbRegistration'
-import GoogleRegistration from './google/GoogleRegistration'
-import MailRegistration from './email/MailRegistration'
+import FbRegistration from './fb/FbOption'
+import GoogleRegistration from './google/GoogleOption'
+import MailRegistration from './email/MailOption'
 
 const GladScreen = () => {
   return (
