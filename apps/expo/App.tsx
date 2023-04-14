@@ -1,13 +1,20 @@
 import { NativeNavigation } from 'app/navigation/native'
 import { Provider } from 'app/provider'
-import { Provider as PaperProvider } from 'react-native-paper'
+import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper'
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+  },
+}
 
 export default function App() {
   return (
-    <PaperProvider>
-      <Provider>
+    <Provider>
+      <PaperProvider theme={theme}>
         <NativeNavigation />
-      </Provider>
-    </PaperProvider>
+      </PaperProvider>
+    </Provider>
   )
 }
