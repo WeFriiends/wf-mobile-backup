@@ -1,6 +1,6 @@
 import { HomeScreen } from '../../features/home/screen'
 import RegistrationOptionsScreen from '../../features/registration/RegistrationOptionsScreen'
-import MailCreds from '../../features/registration/email/MailCreds'
+import MailCreds from '../../features/registration/email/MailCredsContainer'
 import GladScreen from '../../features/registration/GladScreen'
 import ProfileScreen from 'app/features/user/profile-screen'
 import { UserDetailScreen } from '../../features/user/detail-screen'

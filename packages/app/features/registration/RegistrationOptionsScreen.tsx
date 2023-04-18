@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
 import { TextLink } from 'solito/link'
 import Logo from 'app/components/Logo'
-import { Avatar, Button, Card, Text, TextInput } from 'react-native-paper'
+import { Text } from 'react-native-paper'
 import FbOption from './fb/FbOption'
 import GoogleOption from './google/GoogleOption'
 import MailOption from './email/MailOption'
@@ -21,9 +21,7 @@ const RegistrationOptionsScreen = () => {
       </View>
       <View style={styles.registrationContainer}>
         <View style={styles.textBlock}>
-          <Text style={styles.coloredText} variant="headlineMedium">
-            New here?
-          </Text>
+          <Text style={styles.coloredText}>New here?</Text>
           <Text variant="titleLarge">Create an account</Text>
         </View>
         <View>
@@ -62,6 +60,9 @@ const styles = StyleSheet.create({
   },
   coloredText: {
     color: '#F46B5D',
+    fontWeight: '600',
+    lineHeight: 40,
+    fontSize: 32,
   },
   logoView: {
     height: 80,
