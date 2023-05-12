@@ -1,19 +1,18 @@
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
 import { Avatar, Button, Card, Text } from 'react-native-paper'
-import { fetchGoogleAcc } from '../../../actions/registration/fetchGoogleAcc'
 
-const GoogleRegistration = () => {
+const FbOption = () => {
   return (
     <View style={styles.viewContainer}>
-      <Card onPress={fetchGoogleAcc} style={styles.cardContainer}>
+      <Card onPress={() => console.log('FB')} style={styles.cardContainer}>
         <Card.Content style={styles.cardContent}>
           <Avatar.Image
             style={styles.image}
             size={24}
-            source={require('public/google.png')}
+            source={require('public/facebook.png')}
           />
-          <Text variant="bodyMedium">Google</Text>
+          <Text variant="bodyMedium">Facebook</Text>
         </Card.Content>
       </Card>
     </View>
@@ -28,6 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF1EC',
     boxShadow: 'none',
     alignItems: 'center',
+    cursor: 'pointer',
   },
   cardContent: {
     display: 'flex',
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default GoogleRegistration
+export default FbOption
