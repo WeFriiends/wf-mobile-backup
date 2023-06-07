@@ -1,21 +1,33 @@
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
 import { Avatar, Button, Card, Text } from 'react-native-paper'
-import { googleSignIn } from '../../../actions/registration/fetchGoogleAcc'
+import { SolitoImage } from 'solito/image'
+import { Link } from 'solito/link'
+import { baseUrl } from 'app/actions/constants'
 
 const GoogleOption = () => {
   return (
     <View style={styles.viewContainer}>
-      <Card onPress={googleSignIn} style={styles.cardContainer}>
-        <Card.Content style={styles.cardContent}>
-          <Avatar.Image
-            style={styles.image}
-            size={24}
-            source={require('public/google.png')}
-          />
-          <Text variant="bodyMedium">Google</Text>
-        </Card.Content>
-      </Card>
+      <Link href={`${baseUrl}/api/auth/google`}>
+        <Card style={styles.cardContainer}>
+          <Card.Content style={styles.cardContent}>
+            <Avatar.Image
+              style={styles.image}
+              size={24}
+              source={require('../../../public/google.png')}
+            />
+            {/* <SolitoImage
+            src="../../../public/google.png"
+            height={100}
+            width={100}
+            alt="A cool artist's image."
+            style={undefined}
+            resizeMode={undefined}
+          /> */}
+            <Text variant="bodyMedium">Google</Text>
+          </Card.Content>
+        </Card>
+      </Link>
     </View>
   )
 }

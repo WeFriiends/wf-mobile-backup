@@ -11,10 +11,7 @@ const Stack = createNativeStackNavigator<{
   'user-detail': {
     id: string
   }
-  registration: undefined
-  'mail-sign': {
-    acc: string
-  }
+  'mail-sign': undefined
   'glad-screen': undefined
   'user-profile': {
     id: string
@@ -26,30 +23,23 @@ export function NativeNavigation() {
     <Stack.Navigator>
       <Stack.Screen
         name="home"
-        component={HomeScreen}
-        options={{
-          title: 'Home',
-        }}
-      />
-      <Stack.Screen
-        name="registration"
         component={RegistrationOptionsScreen}
         options={{
-          title: 'Registration',
+          title: 'Home',
         }}
       />
       <Stack.Screen
         name="mail-sign"
         component={MailCreds}
         options={{
-          title: 'MailSign',
+          title: 'Mail Sign',
         }}
       />
       <Stack.Screen
         name="glad-screen"
         component={GladScreen}
         options={{
-          title: 'GladScreen',
+          title: 'Glad Screen',
         }}
       />
       <Stack.Screen

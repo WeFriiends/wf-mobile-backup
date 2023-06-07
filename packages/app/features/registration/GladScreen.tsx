@@ -13,14 +13,14 @@ const GladScreen = () => {
         alignItems: 'center',
       }}
     >
-      <SolitoImage
+      {/* <SolitoImage
         src="/account-header.svg"
         height={100}
         width={100}
         alt=""
         style={styles.imageTop}
         resizeMode={'cover'}
-      />
+      /> */}
       <View
         style={{
           alignItems: 'center',
@@ -47,14 +47,14 @@ const GladScreen = () => {
           </Button>
         </View>
       </View>
-      <SolitoImage
+      {/* <SolitoImage
         src="/account-footer.svg"
         height={150}
         width={400}
         alt=""
         style={styles.imageBottom}
         resizeMode={'cover'}
-      />
+      /> */}
     </View>
   )
 }

@@ -1,7 +1,6 @@
-import * as Linking from 'expo-linking'
-
-import { NavigationContainer } from '@react-navigation/native'
 import { useMemo } from 'react'
+import * as Linking from 'expo-linking'
+import { NavigationContainer } from '@react-navigation/native'
 
 export function NavigationProvider({
   children,
@@ -17,7 +16,7 @@ export function NavigationProvider({
             initialRouteName: 'home',
             screens: {
               home: '',
-              registration: 'registration',
+              'mail-sign': 'registration/mail-sign',
               'user-detail': 'user/:id',
               'user-profile': 'user-profile',
             },
