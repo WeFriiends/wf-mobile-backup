@@ -1,12 +1,18 @@
+import { FC } from 'react'
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
-import { Avatar, Button, Card, Text } from 'react-native-paper'
+import { Card, Text } from 'react-native-paper'
 import { Link } from 'solito/link'
 
-const MailOption = () => {
+type MailOptionProps = {
+  signOption?: string
+}
+const MailOption: FC<MailOptionProps> = ({ signOption }) => {
+  console.log({ mail: signOption })
+  const path = signOption ? 'mail-sing-in' : 'mail-sign-up'
   return (
     <View style={styles.viewContainer}>
-      <Link href="/registration/mail-sign">
+      <Link href={`/registration/${path}`}>
         <Card style={styles.cardContainer}>
           <Card.Content>
             <Text variant="bodyMedium">e-mail</Text>

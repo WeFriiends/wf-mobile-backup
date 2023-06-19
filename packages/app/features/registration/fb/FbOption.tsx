@@ -1,26 +1,14 @@
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
-import { Avatar, Button, Card, Text } from 'react-native-paper'
-import { SolitoImage } from 'solito/image'
+import { Card, Text } from 'react-native-paper'
+import FbSvgComponent from '../../../public/FbSvgComponent'
 
 const FbOption = () => {
   return (
     <View style={styles.viewContainer}>
       <Card onPress={() => console.log('FB')} style={styles.cardContainer}>
         <Card.Content style={styles.cardContent}>
-          {/* <Avatar.Image
-            style={styles.image}
-            size={24}
-            source={require('../../../public/facebook.png')}
-          /> */}
-          {/* <SolitoImage
-            src="../../../public/google.png"
-            height={100}
-            width={100}
-            alt="A cool artist's image."
-            style={undefined}
-            resizeMode={undefined}
-          /> */}
+          <FbSvgComponent />
           <Text variant="bodyMedium">Facebook</Text>
         </Card.Content>
       </Card>
@@ -41,10 +29,6 @@ const styles = StyleSheet.create({
   cardContent: {
     display: 'flex',
     flexDirection: 'row',
-  },
-  image: {
-    marginRight: 5,
-    backgroundColor: 'unset',
   },
 })
 

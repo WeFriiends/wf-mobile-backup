@@ -1,14 +1,31 @@
 import { useEffect, useState } from 'react'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
-import { TextLink } from 'solito/link'
-import Logo from 'app/components/Logo'
-import { Text } from 'react-native-paper'
+import { Link, TextLink } from 'solito/link'
+import { createParam } from 'solito'
+import { Text, Button } from 'react-native-paper'
 import FbOption from './fb/FbOption'
 import GoogleOption from './google/GoogleOption'
 import MailOption from './email/MailOption'
+import { RootStackParamList } from 'app/navigation/native'
+import LogoComponent from 'app/components/LogoComponent'
+import RegistrationOptionsHeader from './RegistrationOptionsHeader'
+import RegistrationOptionsFooter from './RegistrationOptionsFooter'
 
-const RegistrationOptionsScreen = () => {
+type RegistrationOptionsProps = NativeStackScreenProps<RootStackParamList>
+type SignQuery = {
+  signOption: string | undefined
+}
+
+const RegistrationOptionsScreen = ({
+  route,
+  navigation,
+}: RegistrationOptionsProps) => {
+  const { useParam } = createParam<SignQuery>()
+  const [signOption, setSignOption] = useParam('signOption')
+  // const [sign, setSign] = useState('Sign In')
+
   return (
     <View
       style={{
@@ -16,34 +33,18 @@ const RegistrationOptionsScreen = () => {
         flex: 1,
       }}
     >
-      <View style={styles.logoView}>
-        <Logo />
-      </View>
+      <LogoComponent />
       <View style={styles.registrationContainer}>
-        <View style={styles.textBlock}>
-          <Text style={styles.coloredText}>New here?</Text>
-          <Text variant="titleLarge">Create an account</Text>
-        </View>
+        <RegistrationOptionsHeader signOption={signOption} />
         <View>
           <FbOption />
           <GoogleOption />
-          <MailOption />
+          <MailOption signOption={signOption} />
         </View>
-        <View>
-          <Text variant="titleMedium">
-            By creating an account, I agree with The Terms of Service and
-            Privacy Policy
-          </Text>
-        </View>
-        <View style={styles.emptyContainer}></View>
-        <View style={styles.signContainer}>
-          <Text variant="titleLarge">Already have an account</Text>
-          <TextLink href="/">
-            <Text style={styles.signText} variant="titleLarge">
-              Sign in
-            </Text>
-          </TextLink>
-        </View>
+        <RegistrationOptionsFooter
+          signOption={signOption}
+          navigation={navigation}
+        />
       </View>
     </View>
   )
@@ -52,17 +53,6 @@ const RegistrationOptionsScreen = () => {
 const styles = StyleSheet.create({
   registrationContainer: {
     margin: 20,
-  },
-  textBlock: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingBottom: 50,
-  },
-  coloredText: {
-    color: '#F46B5D',
-    fontWeight: '600',
-    lineHeight: 40,
-    fontSize: 32,
   },
   logoView: {
     height: 80,

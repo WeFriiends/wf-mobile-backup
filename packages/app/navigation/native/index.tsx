@@ -6,17 +6,20 @@ import ProfileScreen from 'app/features/user/profile-screen'
 import { UserDetailScreen } from '../../features/user/detail-screen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-const Stack = createNativeStackNavigator<{
+export type RootStackParamList = {
   home: undefined
+  'mail-sign-up': undefined
+  'mail-sign-in': undefined
+  'glad-screen': undefined
   'user-detail': {
     id: string
   }
-  'mail-sign': undefined
-  'glad-screen': undefined
   'user-profile': {
     id: string
   }
-}>()
+}
+
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export function NativeNavigation() {
   return (
@@ -29,10 +32,17 @@ export function NativeNavigation() {
         }}
       />
       <Stack.Screen
-        name="mail-sign"
+        name="mail-sign-up"
         component={MailCreds}
         options={{
-          title: 'Mail Sign',
+          title: 'Mail Registration',
+        }}
+      />
+      <Stack.Screen
+        name="mail-sign-in"
+        component={MailCreds}
+        options={{
+          title: 'Mail Sign In',
         }}
       />
       <Stack.Screen

@@ -1,8 +1,11 @@
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
-import { SolitoImage } from 'solito/image'
-import Logo from 'app/components/Logo'
-import { Avatar, Button, Card, Text, TextInput } from 'react-native-paper'
+import Logo from 'app/public/Logo'
+import { Button, Text } from 'react-native-paper'
+import {
+  FooterSvgComponent,
+  HeaderSvgComponent,
+} from 'app/public/GladScreenSvg'
 
 const GladScreen = () => {
   return (
@@ -13,14 +16,7 @@ const GladScreen = () => {
         alignItems: 'center',
       }}
     >
-      {/* <SolitoImage
-        src="/account-header.svg"
-        height={100}
-        width={100}
-        alt=""
-        style={styles.imageTop}
-        resizeMode={'cover'}
-      /> */}
+      <HeaderSvgComponent />
       <View
         style={{
           alignItems: 'center',
@@ -47,14 +43,7 @@ const GladScreen = () => {
           </Button>
         </View>
       </View>
-      {/* <SolitoImage
-        src="/account-footer.svg"
-        height={150}
-        width={400}
-        alt=""
-        style={styles.imageBottom}
-        resizeMode={'cover'}
-      /> */}
+      <FooterSvgComponent />
     </View>
   )
 }
