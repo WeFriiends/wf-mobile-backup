@@ -1,53 +1,72 @@
 import { useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
+import { useRouter } from 'solito/router'
 import { useForm, Controller } from 'react-hook-form'
 import { Button, Card, Text, TextInput } from 'react-native-paper'
-import { mailAccountRegistration } from '../../../actions/registration/mail/mailRegistration'
+import { mailSignIn } from '../../auth/AuthService'
 
+const id = 1
 const MailSignIn = () => {
-  // const onSubmit = async ({ login, morePassword, password }) => {
-  //   await mailAccountRegistration(password, morePassword, login)
-  // }
+  const { push } = useRouter()
 
+  const [login, setLogin] = useState('')
+  const [pass, setPass] = useState('')
+  const [loginValid, setLoginValid] = useState(false)
+  const [isVisible, setVisible] = useState(false)
+
+  const icon = isVisible ? 'eye' : 'eye-off'
+
+  const onSubmit = async () => {
+    await mailSignIn(login, pass)
+    push(`user/${id}`)
+  }
+  const isValid = login && pass
   return (
-    <View>
-      Hello
-      {/* <Text style={styles.labelText}>Login</Text>
+    <View style={styles.mailSignContainer}>
+      <Text style={styles.labelText}>Login</Text>
       <TextInput
         style={styles.inputContainer}
-        onBlur={onBlur}
-        onChangeText={(value) => onChange(value)}
-        value={value}
+        // onBlur={onBlur}
+        onChangeText={(value) => setLogin(value)}
+        value={login}
       />
       <Text style={styles.labelText}>Password</Text>
       <TextInput
         style={styles.inputContainer}
-        onBlur={onBlur}
-        onChangeText={(value) => onChange(value)}
-        value={value}
+        // onBlur={onBlur}
+        onChangeText={(value) => setPass(value)}
+        value={pass}
+        secureTextEntry={!isVisible}
+        right={
+          <TextInput.Icon onPress={() => setVisible(!isVisible)} icon={icon} />
+        }
       />
 
-      {errors.login && (
+      {/* {errors.login && (
         <Text style={styles.errorText}>{errors.login.message}</Text>
-      )}
+      )} */}
       <Text style={styles.labelText}>Forgot password?</Text>
 
       <View style={styles.buttonContainer}>
         <Button
           style={styles.button}
           textColor="white"
-          onPress={handleSubmit(onSubmit)}
+          // onPress={handleSubmit(onSubmit)}
           disabled={!isValid}
         >
           sign in
         </Button>
-      </View> */}
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  mailSignContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   inputContainer: {
     backgroundColor: '#FFF1EC',
     borderRadius: 4,

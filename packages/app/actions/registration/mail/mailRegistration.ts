@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { baseUrl } from '../../constants'
 
 type MailAccountRegistrationResponse = {
   result: number
@@ -13,14 +14,11 @@ export const mailAccountRegistration = async (
   email: string
 ): Promise<MailAccountRegistrationResponse | undefined> => {
   try {
-    const result = await axios.post(
-      'https://clumsy-glasses-clam.cyclic.app/api/auth/register',
-      {
-        password: password1,
-        password2: password2,
-        email: email,
-      }
-    )
+    const result = await axios.post(`${baseUrl}/api/auth/register`, {
+      password: password1,
+      password2: password2,
+      email: email,
+    })
     console.log({ result })
 
     if (result.status === 200) {

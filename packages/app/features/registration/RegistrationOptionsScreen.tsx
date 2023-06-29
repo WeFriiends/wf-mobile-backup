@@ -3,6 +3,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
 import { Link, TextLink } from 'solito/link'
+import { useRouter } from 'solito/router'
 import { createParam } from 'solito'
 import { Text, Button } from 'react-native-paper'
 import FbOption from './fb/FbOption'
@@ -13,24 +14,24 @@ import LogoComponent from 'app/components/LogoComponent'
 import RegistrationOptionsHeader from './RegistrationOptionsHeader'
 import RegistrationOptionsFooter from './RegistrationOptionsFooter'
 
-type RegistrationOptionsProps = NativeStackScreenProps<RootStackParamList>
-type SignQuery = {
-  signOption: string | undefined
-}
+const RegistrationOptionsScreen = () => {
+  const { push, back } = useRouter()
+  const [signOption, setSignOption] = useState<string | undefined>(undefined)
 
-const RegistrationOptionsScreen = ({
-  route,
-  navigation,
-}: RegistrationOptionsProps) => {
-  const { useParam } = createParam<SignQuery>()
-  const [signOption, setSignOption] = useParam('signOption')
-  // const [sign, setSign] = useState('Sign In')
-
+  const onPressSignIn = () => {
+    setSignOption('signIn')
+    push('signIn')
+  }
+  const onPressBackSignUp = () => {
+    setSignOption(undefined)
+    back()
+  }
   return (
     <View
       style={{
         backgroundColor: 'white',
         flex: 1,
+        alignItems: 'center',
       }}
     >
       <LogoComponent />
@@ -43,7 +44,8 @@ const RegistrationOptionsScreen = ({
         </View>
         <RegistrationOptionsFooter
           signOption={signOption}
-          navigation={navigation}
+          onPressSignIn={onPressSignIn}
+          onPressBackSignUp={onPressBackSignUp}
         />
       </View>
     </View>

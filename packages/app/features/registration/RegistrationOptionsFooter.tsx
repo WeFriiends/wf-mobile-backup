@@ -1,46 +1,43 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
 import { Link, TextLink } from 'solito/link'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import { Text, Button } from 'react-native-paper'
-import SignInFooter from './SignInFooter'
 import SignUpFooter from './SignUpFooter'
+import SignInFooter from './SignInFooter'
+import { createParam } from 'solito'
+import { RootStackParamList } from 'app/navigation/native'
 
 type RegistrationOptionsFooterProps = {
   signOption?: string
-  navigation: any
+  onPressBackSignUp: () => void
+  onPressSignIn: () => void
 }
-// type RegistrationOptionsProps = NativeStackScreenProps<RootStackParamList>
 
-const RegistrationOptionsFooter: FC<RegistrationOptionsFooterProps> = ({
+const RegistrationOptionsFooter = ({
   signOption,
-  navigation,
-}) => {
-  console.log({ footer: signOption })
-
-  const buttonText = signOption ? 'Sign In' : 'Sign Up'
-  const path = signOption ? 'mail-sing-in' : 'mail-sign-up'
+  onPressSignIn,
+  onPressBackSignUp,
+}: RegistrationOptionsFooterProps) => {
+  const buttonText = signOption ? 'Sign Up' : 'Sign In'
 
   return (
     <>
-      {signOption ? <SignInFooter /> : <SignUpFooter />}
-      {/* <Button
+      {signOption ? <SignUpFooter /> : <SignInFooter />}
+      <Button
         mode="text"
         onPress={() => {
-          navigation.navigate(`registration/${path}`)
-          // if (signOption === 'signOption In') {
-          //   setSignOption('Sign Up')
-          // }
+          if (signOption) {
+            onPressBackSignUp()
+          } else {
+            onPressSignIn()
+          }
         }}
       >
         {buttonText}
-      </Button> */}
-      <Link href={`/registration/${path}`}>
-        <Text style={styles.signText} variant="titleLarge">
-          {buttonText}
-        </Text>
-      </Link>
+      </Button>
     </>
   )
 }

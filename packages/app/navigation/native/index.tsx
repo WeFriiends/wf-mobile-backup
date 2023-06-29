@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 export type RootStackParamList = {
   home: undefined
+  signIn: undefined
   'mail-sign-up': undefined
   'mail-sign-in': undefined
   'glad-screen': undefined
@@ -29,6 +30,13 @@ export function NativeNavigation() {
         component={RegistrationOptionsScreen}
         options={{
           title: 'Home',
+        }}
+      />
+      <Stack.Screen
+        name="signIn"
+        component={RegistrationOptionsScreen}
+        options={{
+          title: 'Sign In',
         }}
       />
       <Stack.Screen

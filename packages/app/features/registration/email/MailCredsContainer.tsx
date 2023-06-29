@@ -7,11 +7,10 @@ import LogoComponent from 'app/components/LogoComponent'
 import { createParam } from 'solito'
 
 const MailCredsContainer = () => {
-  //fix logic {mailSign: 'mail-sign-up'
   const { useParam } = createParam()
   const [mailSign] = useParam('mail-option')
   console.log({ mailSign })
-  const title = mailSign ? 'Sign In' : 'Enter e-mail'
+  const title = mailSign === 'mail-sign-in' ? 'Sign In' : 'Enter e-mail'
   return (
     <View>
       <LogoComponent />
@@ -19,7 +18,7 @@ const MailCredsContainer = () => {
         <View style={styles.textBlock}>
           <Text style={styles.coloredText}>{title}</Text>
         </View>
-        {mailSign ? <MailSignIn /> : <MailSignUp />}
+        {mailSign === 'mail-sign-in' ? <MailSignIn /> : <MailSignUp />}
       </View>
     </View>
   )

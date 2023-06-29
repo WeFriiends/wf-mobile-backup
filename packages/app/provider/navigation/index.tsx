@@ -18,8 +18,8 @@ export function NavigationProvider({
               home: '',
               registration: {
                 path: 'registration/:mail-option',
-                // parse: { 'mail-option': String },
               },
+              signIn: 'signIn',
               'user-detail': 'user/:id',
               'user-profile': 'user-profile',
               NotFound: '*', // https://reactnavigation.org/docs/configuring-links/#notfound-screen

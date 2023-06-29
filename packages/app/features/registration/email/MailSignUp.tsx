@@ -4,6 +4,7 @@ import { View } from 'dripsy'
 import { useForm, Controller } from 'react-hook-form'
 import { Button, Card, Text, TextInput } from 'react-native-paper'
 import { mailAccountRegistration } from '../../../actions/registration/mail/mailRegistration'
+
 const MailCreds = () => {
   const {
     handleSubmit,
@@ -37,7 +38,7 @@ const MailCreds = () => {
     return 'v'
   }
 
-  const onSubmit = async ({ login, morePassword, password }) => {
+  const onSubmit = async ({ login, morePassword, password }: any) => {
     await mailAccountRegistration(password, morePassword, login)
   }
   console.log({ isValid })

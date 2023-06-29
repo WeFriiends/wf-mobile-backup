@@ -9,7 +9,7 @@ type MailOptionProps = {
 }
 const MailOption: FC<MailOptionProps> = ({ signOption }) => {
   console.log({ mail: signOption })
-  const path = signOption ? 'mail-sing-in' : 'mail-sign-up'
+  const path = signOption ? 'mail-sign-in' : 'mail-sign-up'
   return (
     <View style={styles.viewContainer}>
       <Link href={`/registration/${path}`}>
