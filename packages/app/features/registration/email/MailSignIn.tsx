@@ -2,25 +2,26 @@ import { useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
 import { useRouter } from 'solito/router'
-import { useForm, Controller } from 'react-hook-form'
 import { Button, Card, Text, TextInput } from 'react-native-paper'
 import { mailSignIn } from '../../auth/AuthService'
+import useEyeIcon from '../../../hooks/useEyeIcon'
 
+const defaultInfoMess = '8-16 symbols requared. Capitals and nymbers requared.'
 const id = 1
 const MailSignIn = () => {
   const { push } = useRouter()
 
   const [login, setLogin] = useState('')
   const [pass, setPass] = useState('')
-  const [loginValid, setLoginValid] = useState(false)
-  const [isVisible, setVisible] = useState(false)
+  const [infoMess, setInfoMess] = useState(defaultInfoMess)
 
-  const icon = isVisible ? 'eye' : 'eye-off'
+  const { isVisible, onSetVisible, icon } = useEyeIcon()
 
   const onSubmit = async () => {
     await mailSignIn(login, pass)
     push(`user/${id}`)
   }
+
   const isValid = login && pass
   return (
     <View style={styles.mailSignContainer}>
@@ -38,21 +39,17 @@ const MailSignIn = () => {
         onChangeText={(value) => setPass(value)}
         value={pass}
         secureTextEntry={!isVisible}
-        right={
-          <TextInput.Icon onPress={() => setVisible(!isVisible)} icon={icon} />
-        }
+        right={<TextInput.Icon onPress={() => onSetVisible()} icon={icon} />}
       />
 
-      {/* {errors.login && (
-        <Text style={styles.errorText}>{errors.login.message}</Text>
-      )} */}
+      <Text style={styles.errorText}>{infoMess}</Text>
       <Text style={styles.labelText}>Forgot password?</Text>
 
       <View style={styles.buttonContainer}>
         <Button
           style={styles.button}
           textColor="white"
-          // onPress={handleSubmit(onSubmit)}
+          onPress={onSubmit}
           disabled={!isValid}
         >
           sign in
@@ -83,7 +80,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   errorText: {
-    color: 'red',
+    // color: 'green',
   },
   passValidationItem: {
     display: 'flex',
