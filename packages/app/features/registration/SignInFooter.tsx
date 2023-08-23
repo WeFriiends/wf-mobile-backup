@@ -1,6 +1,8 @@
+import { Button, Text } from 'react-native-paper'
+
 import { StyleSheet } from 'react-native'
+import { TextLink } from 'solito/link'
 import { View } from 'dripsy'
-import { Text, Button } from 'react-native-paper'
 
 const SignInFooter = () => {
   return (
@@ -14,6 +16,7 @@ const SignInFooter = () => {
       <View style={styles.emptyContainer}></View>
       <View style={styles.signContainer}>
         <Text variant="titleLarge">Already have an account</Text>
+        <TextLink href="/user/profile">👈 Go to Profile</TextLink>
       </View>
     </>
   )

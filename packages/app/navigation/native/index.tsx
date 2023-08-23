@@ -1,8 +1,8 @@
+import GladScreen from '../../features/registration/glad-screen/GladScreen'
 import { HomeScreen } from '../../features/home/screen'
-import RegistrationOptionsScreen from '../../features/registration/RegistrationOptionsScreen'
 import MailCreds from '../../features/registration/email/MailCredsContainer'
-import GladScreen from '../../features/registration/GladScreen'
 import ProfileScreen from 'app/features/user/profile-screen'
+import RegistrationOptionsScreen from '../../features/registration/RegistrationOptionsScreen'
 import { UserDetailScreen } from '../../features/user/detail-screen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
@@ -11,7 +11,9 @@ export type RootStackParamList = {
   signIn: undefined
   'mail-sign-up': undefined
   'mail-sign-in': undefined
-  'glad-screen': undefined
+  'glad-screen': {
+    id: string
+  } //undefined
   'user-detail': {
     id: string
   }
@@ -59,6 +61,7 @@ export function NativeNavigation() {
         options={{
           title: 'Glad Screen',
         }}
+       
       />
       <Stack.Screen
         name="user-detail"

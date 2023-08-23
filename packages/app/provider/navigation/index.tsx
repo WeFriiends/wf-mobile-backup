@@ -1,6 +1,7 @@
-import { useMemo } from 'react'
 import * as Linking from 'expo-linking'
+
 import { NavigationContainer } from '@react-navigation/native'
+import { useMemo } from 'react'
 
 export function NavigationProvider({
   children,
@@ -19,6 +20,8 @@ export function NavigationProvider({
               registration: {
                 path: 'registration/:mail-option',
               },
+             'glad-screen': {path: 'registration/glad-screen/:id'}
+              ,
               signIn: 'signIn',
               'user-detail': 'user/:id',
               'user-profile': 'user-profile',

@@ -1,10 +1,5 @@
-import { useEffect, useState } from 'react'
-import { StyleSheet } from 'react-native'
-import { View } from 'dripsy'
-import { useForm, Controller } from 'react-hook-form'
 import { Button, Card, Text, TextInput } from 'react-native-paper'
-import { mailAccountRegistration } from '../../../actions/registration/mail/mailRegistration'
-import useEyeIcon from '../../../hooks/useEyeIcon'
+import { Controller, useForm } from 'react-hook-form'
 import {
   eightCharsMin,
   loginPattern,
@@ -12,6 +7,12 @@ import {
   patternLetters,
   patternNum,
 } from './regexPatterns'
+import { useEffect, useState } from 'react'
+
+import { StyleSheet } from 'react-native'
+import { View } from 'dripsy'
+import { mailAccountRegistration } from '../../../actions/registration/mail/mailRegistration'
+import useEyeIcon from '../../../hooks/useEyeIcon'
 
 const MailCreds = () => {
   const {
@@ -32,9 +33,9 @@ const MailCreds = () => {
 
   const validPass = watch('password')
   const containsNumbers = patternNum.test(validPass)
-  const containsLetters = patternLetters.test(validPass)
-  const containsChars = patternChars.test(validPass)
-  const containsMinChars = eightCharsMin.test(validPass)
+  const containsLetters = true; //patternLetters.test(validPass)
+  const containsChars = true; //patternChars.test(validPass)
+  const containsMinChars = true; //eightCharsMin.test(validPass)
 
   const getDashOrCheck = (isValid: boolean) => {
     const fontColor = isValid ? '#1D878C' : '#F46B5D'
@@ -45,6 +46,7 @@ const MailCreds = () => {
   }
 
   const onSubmit = async ({ login, morePassword, password }: any) => {
+    console.log('press onSubmit')
     await mailAccountRegistration(password, morePassword, login)
   }
 
@@ -92,10 +94,10 @@ const MailCreds = () => {
         rules={{
           required: true,
           validate: {
-            matchPatternNum: (v) => patternNum.test(v),
-            matchPatternLetters: (v) => patternLetters.test(v),
-            matchPatternChars: (v) => patternChars.test(v),
-            matchEightCharsMin: (v) => eightCharsMin.test(v),
+            matchPatternNum: (v) => true, //patternNum.test(v),
+            matchPatternLetters: (v) => true, //patternLetters.test(v),
+            matchPatternChars: (v) => true, //patternChars.test(v),
+            matchEightCharsMin: (v) => true, //eightCharsMin.test(v),
           },
         }}
       />
@@ -133,7 +135,7 @@ const MailCreds = () => {
           style={styles.button}
           textColor="white"
           onPress={handleSubmit(onSubmit)}
-          disabled={!isValid}
+        //   disabled={!isValid}
         >
           create
         </Button>

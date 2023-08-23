@@ -14,6 +14,7 @@ export const mailAccountRegistration = async (
   email: string
 ): Promise<MailAccountRegistrationResponse | undefined> => {
   try {
+    console.log('in registration create')
     const result = await axios.post(`${baseUrl}/api/auth/register`, {
       password: password1,
       password2: password2,
@@ -25,15 +26,15 @@ export const mailAccountRegistration = async (
       return result.data.m
     }
   } catch (err) {
-    console.log(err.response)
+    console.log(err)
   }
 }
 
-export const mailAccountConfirmation = async (confirmationCode) => {
+export const mailAccountConfirmation = async (confirmationCode: string) => {
   try {
     const result = await axios.get(
       `https://clumsy-glasses-clam.cyclic.app/api/auth/confirm/${confirmationCode}`,
-      confirmationCode
+     // confirmationCode
     )
     console.log('result status: ', result.status)
     if (result.status === 200) return true
