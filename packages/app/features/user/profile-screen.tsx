@@ -44,6 +44,7 @@ const ProfileScreen = () => {
         },
     });
     let json = await response.json();
+    console.log(json)
     setProfile(json);
     setIsLoading(false);
   }
@@ -60,6 +61,7 @@ const ProfileScreen = () => {
   }
 
   const getNextQuestion = (action: string) => {
+    console.log('in next question ', action)
     let nextStepId: string | null
     if (action === 'next') {
       nextStepId = currentStep.next
@@ -70,6 +72,7 @@ const ProfileScreen = () => {
     }
     
     if (nextStepId) {
+        console.log('in nextstep')
         const nextStep: Step = ProfileQuestions[nextStepId as Key]
       setCurrentStep(nextStep )
     }
@@ -107,6 +110,7 @@ const ProfileScreen = () => {
           <AddDateOfBirth
             step={currentStep}
             navigateToNextStep={getNextQuestion}
+            dob={profile?.dateOfBirth}
           />
         ) : null}
         {currentStep.key === 'location' ? (
