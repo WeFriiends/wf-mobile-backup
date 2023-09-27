@@ -14,12 +14,9 @@ import ProfileQuestions from 'app/lib/ProfileQuestions.json'
 import { Step } from 'app/types/Step'
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
-import axios from 'axios'
 import { createParam } from 'solito'
 
 type Key = keyof typeof ProfileQuestions;
-
-const { useParam } = createParam<{ id: string }>()
 
 const ProfileScreen = () => {
   const [profile, setProfile] = useState<Profile>()
@@ -34,7 +31,6 @@ const ProfileScreen = () => {
 
   const getProfile = async() => {
     const token = await AsyncStorage.getItem('token');
-    console.log('token is ', token)
     const response = await fetch("https://blushing-pajamas-bear.cyclic.app/api/profile", {
         method: 'GET',
         headers: {
@@ -136,7 +132,6 @@ const ProfileScreen = () => {
         ) : null}
       </View>
       }
-      
     </View>
   )
 }
