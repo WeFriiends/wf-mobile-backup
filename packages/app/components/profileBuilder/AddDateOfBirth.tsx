@@ -96,8 +96,8 @@ console.log(isDateValid)
       {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
   
       <View sx={{ justifyContent: 'center', flex: 1, alignItems: 'center',  mt: 4,  mb: 4, }}>
-      <input
-          type="text"
+      <TextInput
+         
           value={inputDate}
           onChange={handleDateChange}
           placeholder="MM-DD-YYYY"
