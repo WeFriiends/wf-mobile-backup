@@ -46,22 +46,7 @@ console.log(isDateValid)
   };
 
   const formatInputDate = (value: any) => {
-     // Format the date as MM/DD/YYYY while the user is typing
-     const cleanedValue = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
-     const dateArray = cleanedValue.match(/\d{1,2}/g) || [];
- 
-     // Ensure a valid MM/DD/YYYY format with automatic "/" insertion
-     const formattedDate = dateArray
-       .slice(0, 3)
-       .map((part: any, index: any) => (index < 2 ? part + '/' : part))
-       .join('')
-       .slice(0, 10); // Ensure the overall length is not more than 10 characters
- 
-     // Ensure a 4-digit year if year is defined
-     const year = dateArray[2];
-     const paddedYear = year ? year.padStart(4, '0') : '';
- 
-     return `${formattedDate}${paddedYear ? '/' + paddedYear : ''}`;
+    //format date
   };
 
   const handleInput = (action: string) => {
@@ -102,17 +87,6 @@ console.log(isDateValid)
           onChange={handleDateChange}
           placeholder="MM-DD-YYYY"
         />
-      {/* <SafeAreaProvider>
-        <DatePickerInput
-           locale="en"
-          label="Birthdate"
-          value={dob}
-          onChange={(d: any) => setDob(d)}
-          inputMode="start"
-          endYear={2005}
-          startYear={1923}
-        />
-            </SafeAreaProvider> */}
       </View>
    
      <View>
