@@ -34,15 +34,7 @@ const [dob, setDob] = useState();
   const [inputDate, setInputDate] = useState('');
   const [isValid, setIsValid] = useState(true);
   const handleDateChange = (event: any) => {
-    const enteredValue = event.target.value;
-    const formattedDate = formatInputDate(enteredValue);
 
-    setInputDate(formattedDate);
-
-    // Check if the entered date is a valid date using dayjs
-    const isDateValid = dayjs(formattedDate).isValid();
-console.log(isDateValid)
-    setIsValid(isDateValid);
   };
 
   const formatInputDate = (value: any) => {
