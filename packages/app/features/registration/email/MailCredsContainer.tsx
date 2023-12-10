@@ -1,9 +1,9 @@
-import { StyleSheet } from 'react-native'
-import { View } from 'dripsy'
-import { Text } from 'react-native-paper'
-import MailSignUp from './MailSignUp'
-import MailSignIn from './MailSignIn'
 import LogoComponent from 'app/components/LogoComponent'
+import MailSignIn from './MailSignIn'
+import MailSignUp from './MailSignUp'
+import { StyleSheet } from 'react-native'
+import { Text } from 'react-native-paper'
+import { View } from 'dripsy'
 import { createParam } from 'solito'
 
 const MailCredsContainer = () => {

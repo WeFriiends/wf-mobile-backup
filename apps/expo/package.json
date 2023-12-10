@@ -3,6 +3,7 @@
     "@expo/config-plugins": "^7.2.2",
     "@react-native-async-storage/async-storage": "1.18.2",
     "app": "*",
+    "cleave.js": "^1.6.0",
     "dayjs": "^1.11.10",
     "dripsy": "^4.3.3",
     "expo": "^49.0.0",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@types/cleave.js": "^1.4.12",
     "@types/react": "~18.2.14",
     "@types/react-native": "~0.69.1",
     "typescript": "^5.1.3"

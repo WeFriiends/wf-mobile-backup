@@ -14,7 +14,6 @@ import {
 } from "react";
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import CountryPicker from 'react-native-country-picker-modal';
 import { Location } from "app/types/Location";
 import { Profile } from "app/types/Profile";
 import React from "react";
@@ -70,10 +69,10 @@ const AddLocation = (props: AddLocationProps) => {
         }
     }
 
-    const onSelect = (country) => {
-        setCountryCode(country.cca2);
-        setCountry(country);
-      }
+    // const onSelect = (country) => {
+    //     setCountryCode(country.cca2);
+    //     setCountry(country);
+    //   }
 
     const handlePress = (action: string) => {
         const country  = countryRef.current;
@@ -120,15 +119,7 @@ const AddLocation = (props: AddLocationProps) => {
             <View>
                 <Text>{text}</Text>
             </View>
-            <CountryPicker
-                countryCode={countryCode as "AF"}
-                withFilter={true}
-                withFlag={true}
-                withCountryNameButton={true}
-                withAlphaFilter={true}
-                onSelect={onSelect}
-                visible={false}
-            />
+         
             <Button 
                 title="Next"
                 onPress={() => handleInput('next')}

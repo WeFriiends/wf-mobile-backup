@@ -1,4 +1,5 @@
-import { Text } from "dripsy";
+import { StyleSheet } from 'react-native'
+import { Text } from "react-native";
 
 type PromptProps = {
     text?: string | null
@@ -6,10 +7,19 @@ type PromptProps = {
 
 const Prompt = (props: PromptProps) => {
     return (
-        <Text>
+        <Text style={styles.prompt}>
             {props.text}
         </Text>
     )
 }
+
+const styles = StyleSheet.create({
+    prompt: {
+        fontSize: 24,
+      //  fontWeight: "bold",
+       color: 'salmon'
+     
+    }
+})
 
 export default Prompt;

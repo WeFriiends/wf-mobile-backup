@@ -52,11 +52,12 @@ const MailCreds = () => {
 
   return (
     <View>
-      <Text style={styles.labelText}>Login</Text>
+      <Text style={styles.labelText}>Email</Text>
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
+         
             style={styles.inputContainer}
             onBlur={onBlur}
             onChangeText={(value) => onChange(value)}
@@ -64,13 +65,13 @@ const MailCreds = () => {
           />
         )}
         name="login"
-        rules={{
-          required: true,
-          pattern: {
-            value: loginPattern,
-            message: 'Invalid email address',
-          },
-        }}
+        // rules={{
+        //   required: true,
+        //   pattern: {
+        //    // value: loginPattern,
+        //     message: 'Invalid email address',
+        //   },
+        // }}
       />
       {errors.login && (
         <Text style={styles.errorText}>{errors.login.message}</Text>

@@ -31,8 +31,8 @@ const ProfileScreen = () => {
   }, [])
 
   const getProfile = async () => {
-    console.log('git inside getProfile')
-    const token = await AsyncStorage.getItem('token');
+    console.log('get inside getProfile')
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGFmM2E0MjI2MDA2ZDc2ODE2YzAwYTciLCJ1c2VySWQiOiJuYXRhc29ibEBob3RtYWlsLmNvbSIsImlhdCI6MTY4OTIwNjI2NX0.x_eGbSkzo29bCCwtgdFmLdgJje2Ktq93beiPVdGcVsQ' //await AsyncStorage.getItem('token');
     console.log("got token ", token)
     if (token) {
         const response = await fetch(

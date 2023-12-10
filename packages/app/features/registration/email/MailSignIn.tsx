@@ -1,10 +1,11 @@
+import { Button, Card, Text, TextInput } from 'react-native-paper'
 import { useEffect, useState } from 'react'
+
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
-import { useRouter } from 'solito/router'
-import { Button, Card, Text, TextInput } from 'react-native-paper'
 import { mailSignIn } from '../../auth/AuthService'
 import useEyeIcon from '../../../hooks/useEyeIcon'
+import { useRouter } from 'solito/router'
 
 const defaultInfoMess = '8-16 symbols requared. Capitals and nymbers requared.'
 const id = 1
@@ -25,7 +26,7 @@ const MailSignIn = () => {
   const isValid = login && pass
   return (
     <View style={styles.mailSignContainer}>
-      <Text style={styles.labelText}>Login</Text>
+      <Text style={styles.labelText}>Uername</Text>
       <TextInput
         style={styles.inputContainer}
         // onBlur={onBlur}

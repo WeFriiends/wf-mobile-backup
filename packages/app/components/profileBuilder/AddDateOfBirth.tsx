@@ -1,18 +1,21 @@
 import {
    Button,
+   Keyboard,
    StyleSheet,
-   Text
+   Text,
+   TouchableWithoutFeedback
 } from 'react-native'
 import MaskInput, { Masks, useMaskedInputProps }from 'react-native-mask-input';
+import React, { ReactNode } from "react";
 import { enGB, registerTranslation } from 'react-native-paper-dates'
 import { useEffect, useState } from 'react'
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Cleave from 'cleave.js/react';
 import Data from '../Data'
 import { DatePickerInput } from 'react-native-paper-dates';
 import { Profile } from '../../types/Profile'
 import Prompt from '../Prompt'
-import React from 'react'
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Step } from '../../types/Step'
 import { TextInput } from 'react-native-paper';
@@ -31,26 +34,36 @@ const AddDateOfBirth = (props: AddDateOfBirthProps) => {
 const [dob, setDob] = useState();
   const [profile, setProfile] = useState<Profile>()
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [inputDate, setInputDate] = useState('');
   const [isValid, setIsValid] = useState(true);
-  const handleDateChange = (event: any) => {
+
+  const handleDateChange = (text: string) => {
+    // console.log(key, value);
+    // setInputDate({...inputDate, [key]: value});
+    // console.log(inputDate);
+    const formattedDate = text.replace(/[^0-9]/g, '');
+
+    // Insert '/' at appropriate positions
+    if (formattedDate.length >= 2) {
+      setDate(formattedDate.slice(0, 2) + (formattedDate.length >= 4 ? '/' : '') + formattedDate.slice(2, 4) + (formattedDate.length >= 6 ? '/' : '') + formattedDate.slice(4, 8));
+    } else {
+      setDate(formattedDate);
+    }
 
   };
+  interface Props {
+    children?: ReactNode
+    // any props that come into the component
+}
+  const DismissKeyboard = ({ children }: Props) => (
+    <TouchableWithoutFeedback 
+    onPress={() => Keyboard.dismiss()}> {children}
+    </TouchableWithoutFeedback>
+    );
 
-  const formatInputDate = (value: any) => {
-    //format date
-  };
+    const [date, setDate] = useState('');
 
   const handleInput = (action: string) => {
     console.log(dob)
- //   const isDobValid = validateDob(dob);
-    // if (isDobValid) {
-    //   //  handlePress(action);
-    //   //  props.navigateToNextStep(action)
-    // } else {
-    //     setErrorMessage('Invalid date');
-    //     return;
-    // }
   }
 
   const handlePress = (action: string) => {
@@ -59,6 +72,7 @@ const [dob, setDob] = useState();
   }
 
   return (
+    // <DismissKeyboard> 
     <View sx={{ mt: 4, alignItems: 'center' }}>
       <View>
         <Prompt text={props.step.prompt} />
@@ -72,19 +86,69 @@ const [dob, setDob] = useState();
       </View>
       {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
   
-      <View sx={{ justifyContent: 'center', flex: 1, alignItems: 'center',  mt: 4,  mb: 4, }}>
-      <TextInput
+     
+      <View
+        // sx={{  flexDirection: 'row',
+        // alignContent: 'space-between', mt: 4,  mb: 4, }}
+       >
          
-          value={inputDate}
-          onChange={handleDateChange}
-          placeholder="MM-DD-YYYY"
+         <TextInput
+        style={styles.input}
+        keyboardType="numeric"
+        maxLength={10} // Maximum length of the date input
+        value={date}
+        mode="outlined"
+        onChangeText={handleDateChange}
+        focusable
+        label={"MM/DD/YYYY"}
+      />
+{/* <View sx={{pr:2}}>
+<TextInput
+           keyboardType="numeric"
+           maxLength={2}
+          value={inputDate.month || ''}
+          onChangeText={(newValue) => handleDateChange("month", newValue)}
+          style={styles.input}
+          mode="outlined"
+          label={"MM"}
+          focusable
         />
-      </View>
+</View>
+<View  sx={{pr:2}}>
+<TextInput
+           keyboardType="numeric"
+           maxLength={2}
+          value={inputDate.day || ''}
+          onChangeText={(newValue) => handleDateChange("day", newValue)}
+          placeholder="DD"
+          style={styles.input}
+          label={"DD"}
+          mode="outlined"
+          focusable
+        />
+</View>
+   <View sx={{pr:2}}>
+   <TextInput
+           keyboardType="numeric"
+           maxLength={4}
+          value={inputDate.year||''}
+          onChangeText={(newValue) => handleDateChange("year", newValue)}
+          placeholder="YYYY"
+          style={styles.input}
+          label={"YYYY"}
+          mode="outlined"
+          focusable
+        />
+    </View>    */}
+      
    
+      </View>
+    
      <View>
       <Button title="Next" onPress={() => handleInput('next')} />
       </View>
     </View>
+   
   )
 }
 
@@ -95,10 +159,13 @@ const styles = StyleSheet.create({
     input: {
       backgroundColor: '#FFF1EC',
       height: 40,
-      margin: 12,
-      padding: 10,
-      width: 300,
+      textAlign: 'center',
+    //  margin: 12,
+    //  padding: 10,
+      width: 160,
       borderRadius: 5,
+    //   borderColor: "red",
+    //   borderWidth: 2
     },
     button: {
       marginTop: 10,
@@ -117,3 +184,33 @@ const styles = StyleSheet.create({
    
   })
 export default AddDateOfBirth
+/*
+function isValidDate(dateString) {
+  // Check if the input is a string
+  if (typeof dateString !== 'string') {
+    return false;
+  }
+
+  // Parse the date using the Date object
+  const dateObject = new Date(dateString);
+
+  // Check if the parsed date is a valid date
+  if (isNaN(dateObject.getTime())) {
+    return false;
+  }
+
+  // Check if the input date string matches the parsed date
+  // This is to handle cases where the input date string has been modified (e.g., '2021-02-30' -> '2021-03-02')
+  const parsedDateString = dateObject.toISOString().split('T')[0];
+  return dateString === parsedDateString;
+}
+
+// Example usage:
+const inputDate = '2021-12-31';
+if (isValidDate(inputDate)) {
+  console.log(`${inputDate} is a valid date.`);
+} else {
+  console.log(`${inputDate} is not a valid date.`);
+}
+
+*/

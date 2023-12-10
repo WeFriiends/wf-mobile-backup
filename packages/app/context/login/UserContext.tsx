@@ -1,7 +1,8 @@
-import { useState, useEffect, createContext, ReactNode } from 'react'
+import { ReactNode, createContext, useEffect, useState } from 'react'
 
 import MailSignIn from '../../features/registration/email/MailSignIn'
-import { isAuthenticated } from '../../features/auth/AuthService'
+
+//import { isAuthenticated } from '../../features/auth/AuthService'
 
 export interface User {
   authToken?: string
@@ -12,7 +13,7 @@ interface AuthContext {
   setCurrentUser: (user: User | null) => void
 }
 
-const UserContext = createContext<AuthContext>({
+export const UserContext = createContext<AuthContext>({
   currentUser: null,
   setCurrentUser: () => {},
 })
@@ -22,13 +23,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const checkLoggedIn = async () => {
-      let cuser = isAuthenticated()
-      if (cuser === null) {
-        localStorage.setItem('user', '')
-        cuser = ''
-      }
+    //   let cuser = isAuthenticated()
+    //   if (cuser === null) {
+    //   //  localStorage.setItem('user', '')
+    //     cuser = ''
+    //   }
 
-      setCurrentUser(cuser)
+      setCurrentUser(null)
     }
 
     checkLoggedIn()
