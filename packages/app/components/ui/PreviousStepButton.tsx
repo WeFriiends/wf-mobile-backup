@@ -19,7 +19,7 @@ const PreviousStepButton = () => {
       onPressOut={onPressOutHandler}
       activeOpacity={1}
     >
-      <Image style={styles.icon} source={require('./arrow_back.svg')} />
+      <Image style={styles.icon} source={require('./arrow_back.png')} />
     </TouchableOpacity>
   );
 }
