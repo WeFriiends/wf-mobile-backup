@@ -4,6 +4,7 @@ import { NativeNavigation } from 'app/navigation/native'
 import { Provider } from 'app/provider'
 import { UserProvider } from 'app/context/login/UserContext'
 
+
 const theme = {
   ...DefaultTheme,
   colors: {
