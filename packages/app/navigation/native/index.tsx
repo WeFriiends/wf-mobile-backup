@@ -10,7 +10,7 @@ export type RootStackParamList = {
   home: undefined
   signIn: undefined
   'mail-sign-up': undefined
-  registration: undefined
+  'registration': undefined  //added ''
   'mail-sign-in': undefined
   'glad-screen': {
     id: string
@@ -43,7 +43,7 @@ export function NativeNavigation() {
         }}
       />
       <Stack.Screen
-        name="mail-sign-up" //mail-sign-up
+        name="registration" // it used to be mail-sign-up, renamed to registration
         component={MailCreds}
         options={{
           title: 'Mail Registration',

@@ -10,7 +10,7 @@ const MailCredsContainer = () => {
   const { useParam } = createParam()
   const [mailSign] = useParam('mail-option')
   console.log({ mailSign })
-  const title = mailSign === 'mail-sign-in' ? 'Sign In' : 'Enter e-mail'
+  const title = mailSign === 'mail-sign-in' ? 'Sign In' : 'Enter email'
   return (
     <View>
       <LogoComponent />
