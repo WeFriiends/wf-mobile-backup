@@ -15,7 +15,7 @@ const MailOption: FC<MailOptionProps> = ({ signOption }) => {
   const path = signOption ? 'mail-sign-in' : 'mail-sign-up'
   return (
     <View style={styles.viewContainer}>
-      <Link href={`registration/${path}`}>
+      <Link href={`/registration/${path}`}>
         <Card style={styles.cardContainer}>
           <Card.Content>
             <Text variant="bodyMedium">Email</Text>
