@@ -18,7 +18,7 @@ const MailOption: FC<MailOptionProps> = ({ signOption }) => {
       <Link href={`registration/${path}`}>
         <Card style={styles.cardContainer}>
           <Card.Content>
-            <Text variant="bodyMedium">e-mail</Text>
+            <Text variant="bodyMedium">Email</Text>
           </Card.Content>
         </Card>
       </Link>
