@@ -21,7 +21,7 @@ const RegistrationOptionsScreen = () => {
 
   const onPressSignIn = () => {
     setSignOption('signIn')
-    push('signIn')
+    push('/signIn')  //added "/"
   }
   const onPressBackSignUp = () => {
     setSignOption(undefined)
