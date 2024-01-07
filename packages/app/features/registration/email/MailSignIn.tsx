@@ -20,13 +20,13 @@ const MailSignIn = () => {
 
   const onSubmit = async () => {
     await mailSignIn(login, pass)
-    push(`user/${id}`)
+    push(`/user/${id}`)  //added "/""
   }
 
   const isValid = login && pass
   return (
     <View style={styles.mailSignContainer}>
-      <Text style={styles.labelText}>Uername</Text>
+      <Text style={styles.labelText}>Email</Text>
       <TextInput
         style={styles.inputContainer}
         // onBlur={onBlur}
@@ -43,7 +43,7 @@ const MailSignIn = () => {
         right={<TextInput.Icon onPress={() => onSetVisible()} icon={icon} />}
       />
 
-      <Text style={styles.errorText}>{infoMess}</Text>
+      {/* <Text style={styles.errorText}>{infoMess}</Text> */}
       <Text style={styles.labelText}>Forgot password?</Text>
 
       <View style={styles.buttonContainer}>
