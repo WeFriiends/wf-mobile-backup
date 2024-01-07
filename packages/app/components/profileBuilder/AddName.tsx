@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Data from '../Data'
-import { Profile } from 'app/types/Profile'
 import Prompt from '../Prompt'
 import { Step } from 'app/types/Step'
 import { TextInput } from 'react-native-paper'
@@ -32,7 +31,6 @@ const AddName = (props: AddNameProps) => {
 
   const getToken = async () => {
     const token = await AsyncStorage.getItem('user')
-    console.log('got token in AddName ', token)
     if (token) {
       setToken(token)
     }
