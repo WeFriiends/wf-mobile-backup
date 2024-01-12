@@ -24,19 +24,20 @@ const AddName = (props: AddNameProps) => {
   const [token, setToken] = useState<any>()
 
   useEffect(() => {
+    if (name) {
+      setIsInputValidated(true)
+    }
     getToken()
-  })
+  }, [])
 
   const getToken = async () => {
-    const token = await AsyncStorage.getItem('token')
+    const token = await AsyncStorage.getItem('user')
     if (token) {
       setToken(token)
     }
   }
 
   const handleInput = (action: string) => {
-    console.log('buton clicked')
-    console.log('name ', name)
     if (name) {
       handlePress(action)
       setErrorMessage('')
@@ -46,10 +47,7 @@ const AddName = (props: AddNameProps) => {
   }
 
   const handlePress = async (action: string) => {
-    console.log('initial name ', initialName)
-    console.log(initialName === name)
     if (initialName !== name) {
-      console.log('here')
       try {
         await axios.post(
           'https://blushing-pajamas-bear.cyclic.app/api/profile/name',
