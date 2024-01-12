@@ -32,7 +32,6 @@ const AddName = (props: AddNameProps) => {
 
   const getToken = async () => {
     const token = await AsyncStorage.getItem('user')
-    console.log('got token in AddName ', token)
     if (token) {
       setToken(token)
     }

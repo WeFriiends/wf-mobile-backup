@@ -31,7 +31,6 @@ const ProfileScreen = () => {
 
   const getProfile = async () => {
     const token = await AsyncStorage.getItem('user')
-
     if (token) {
       try {
         const response: any = await axios.get(
@@ -48,6 +47,7 @@ const ProfileScreen = () => {
         setIsLoading(false)
       } catch (e) {
         console.log(e)
+        setIsLoading(false)
       }
     }
   }
