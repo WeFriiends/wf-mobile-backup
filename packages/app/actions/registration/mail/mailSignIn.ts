@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
+
 import { baseUrl } from '../../constants'
 
 type MailSignInResponse = {
@@ -20,7 +21,8 @@ export const fetchMailSignIn = async (
     console.log({ result })
 
     return result
-  } catch (err) {
-    return err
+  } catch (err: any) {
+   console.log(err);
+   return err
   }
 }
