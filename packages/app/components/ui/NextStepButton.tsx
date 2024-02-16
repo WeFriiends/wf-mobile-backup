@@ -8,7 +8,6 @@ type NextStepButtonProps = {
 
 const NextStepButton = (props: NextStepButtonProps) => {
   const { isInputValidated, handleInput } = props;
-  // const [isPressed, setIsPressed] = useState<boolean>(false);
 
   return (
     <TouchableOpacity
@@ -29,15 +28,8 @@ const NextStepButton = (props: NextStepButtonProps) => {
 export default NextStepButton;
 
 const styles = StyleSheet.create({
-  // button: {
-  //   height: 60,
-  //   width: 350,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  // },
   text: {
     color: '#FFF',
-    // fontFamily: 'Inter',
     fontSize: 18,
     fontStyle: 'normal',
     fontWeight: "600",
