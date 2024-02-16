@@ -1,25 +1,27 @@
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 import React, { useState } from 'react';
 
-const NextStepButton = () => {
-  const [isPressed, setIsPressed] = useState(false);
+type NextStepButtonProps = {
+  isInputValidated: boolean,
+  handleInput: () => void;
+};
 
-   const onPressInHandler = () => {
-    setIsPressed(true);
-  };
-
-  const onPressOutHandler = () => {
-    setIsPressed(false);
-  };
+const NextStepButton = (props: NextStepButtonProps) => {
+  const { isInputValidated, handleInput } = props;
+  // const [isPressed, setIsPressed] = useState<boolean>(false);
 
   return (
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: isPressed ? '#F05A22' : '#FB8F67' }]}
-      onPressIn={onPressInHandler}
-      onPressOut={onPressOutHandler}
+      style={isInputValidated ? styles.validatedInput : styles.button}
+      onPress={handleInput}
       activeOpacity={1}
+      disabled={!isInputValidated}
     >
-      <Text style={styles.text}>Next</Text>
+      <Text
+        style={isInputValidated ? styles.validatedText : styles.btnText}
+      >
+        Next
+      </Text>
     </TouchableOpacity>
   );
 }
@@ -27,18 +29,48 @@ const NextStepButton = () => {
 export default NextStepButton;
 
 const styles = StyleSheet.create({
-  button: {
-    height: 60,
-    width: 350,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  // button: {
+  //   height: 60,
+  //   width: 350,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  // },
   text: {
     color: '#FFF',
-    fontFamily: 'Inter',
+    // fontFamily: 'Inter',
     fontSize: 18,
     fontStyle: 'normal',
     fontWeight: "600",
     lineHeight: 24,
+  },
+  validatedInput: {
+    backgroundColor: 'salmon',
+    text: 'white',
+    marginTop: 10,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: 'salmon',
+    width: 300,
+    height: 40,
+    alignItems: 'center',
+    padding: 5,
+  },
+  button: {
+    marginTop: 10,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: 'salmon',
+    width: 300,
+    height: 40,
+    alignItems: 'center',
+    padding: 5,
+  },
+  btnText: {
+    fontSize: 18,
+    color: 'salmon',
+  },
+  validatedText: {
+    fontSize: 18,
+    color: 'white',
   },
 });

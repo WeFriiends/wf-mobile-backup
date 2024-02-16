@@ -1,15 +1,20 @@
 import { TouchableOpacity, StyleSheet, Image } from 'react-native';
 import React, { useState } from 'react';
 
-const PreviousStepButton = () => {
-  const [isPressed, setIsPressed] = useState(false);
+type PreviousStepButtonProps = {
+  handleInput: () => void;
+};
 
-   const onPressInHandler = () => {
+const PreviousStepButton = (props: PreviousStepButtonProps) => {
+  const [isPressed, setIsPressed] = useState<boolean>(false);
+
+  const onPressInHandler = () => {
     setIsPressed(true);
   };
 
   const onPressOutHandler = () => {
     setIsPressed(false);
+    props.handleInput();
   };
 
   return (
