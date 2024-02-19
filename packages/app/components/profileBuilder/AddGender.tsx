@@ -1,124 +1,158 @@
-import {
-    Button,
-    StyleSheet,
-    Text,
-    View
-} from "react-native";
-import{
-    useEffect,
-    useState
-} from "react";
+import { Button, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { useEffect, useState } from 'react'
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Profile } from "app/types/Profile";
-import React from "react";
-import { Step } from "app/types/Step";
+import Data from '../Data'
+import Prompt from '../Prompt'
+import SVGFemaleComponent from '../../lib/assets/FemaleSVG'
+import SVGMaleComponent from '../../lib/assets/MaleSVG'
+import { Step } from 'app/types/Step'
+import { View } from 'dripsy'
 
 type AddGenderProps = {
-    step: Step,
-    saveInput: any,
-    navigateToPreviousStep: any
+  step: Step
+  saveInput: (value: string, action: string) => void
+  navigateToPreviousStep: (action: string) => void
+  gender: string | undefined
 }
 
 const AddGender = (props: AddGenderProps) => {
-    
-    const [gender, setGender] = useState<string>('');
-    const [profile, setProfile] = useState<Profile>();
-    const [errorMessage, setErrorMessage] = useState<string>('');
+  const [gender, setGender] = useState<string | undefined>(props.gender)
+  const [errorMessage, setErrorMessage] = useState<string>('')
+  const [isInputValidated, setIsInputValidated] = useState<boolean>(false)
+  const [femaleIconColor, setFemaleIconColor] = useState<string>('#F2F4F5')
 
-    useEffect(() => {
-        getGender;
-    }, []);
-    
-    const getGender = async() => {
-        const profile: Profile = await JSON.parse(await AsyncStorage.getItem('profile') as string);
-        if (profile.gender) {
-            setProfile(profile);
-            setGender(profile.gender);
-        }
+  useEffect(() => {
+    if (gender) {
+      if (gender === 'F') setFemaleIconColor('#FFF1EC')
+      setIsInputValidated(true)
     }
+  }, [])
 
-    const handleInput = (action: string) => {
-        if (action === 'next') {
-            if (gender !== "") {
-                handlePress(action);
-            } else {
-                setErrorMessage("Field cannot be empty");
-            }
-        } else if (action === 'prev') {
-            if (gender !== profile?.gender) {
-                handlePress(action);
-            } else {
-                props.navigateToPreviousStep(action);
-            }
-        }
-        
+  const handlePress = async (action: string) => {
+    if (action === 'next') {
+      if (!isInputValidated) {
+        setErrorMessage('Gender is a mandatory field')
+      } else {
+        props.saveInput(gender as string, action)
+      }
+    } else {
+      props.navigateToPreviousStep('prev')
     }
-    const handlePress = (action: string) => {
-        setGender('');
-        props.saveInput(gender, action);
+  }
+
+  const handleChange = (gender: string) => {
+    console.log('gender ', gender)
+    if (gender === 'F') {
+      setFemaleIconColor('#FFF1EC')
+    } else {
+      setFemaleIconColor('#F2F4F5')
     }
-    
-    return (
-        <>
-            <Text>
-                {props.step.prompt}
-            </Text>
-            <Text>
-                {props.step.data}
-            </Text>
-            {
-                errorMessage ? 
-                (<Text style={styles.error}>
-                    {errorMessage}
-                </Text>) : null
-            }
-            
-            <MaterialCommunityIcons 
-                name="human-female" 
-                size={68} 
-                color="pink"
-                onPress={() => {
-                    setErrorMessage('');
-                    setGender('F')
-                }} 
-            />
-            <Text>Female</Text>
-            <View style={{borderColor: "black", borderWidth: 1, width: 80, borderRadius: 35}}>
-            <MaterialCommunityIcons 
-                name="human-male" 
-                size={68} 
-                color="lightblue"
-                onPress={() => {
-                    setErrorMessage("Only females can create an account")
-                }}  
-            />
+    setGender(gender)
+    setIsInputValidated(true)
+    setErrorMessage('')
+  }
+
+  return (
+    <View sx={{ alignItems: 'center' }}>
+      <View>
+        <Button title="Prev" onPress={() => handlePress('prev')} />
+      </View>
+      <View sx={{ mt: 3 }}>
+        <Prompt text={props.step.prompt} />
+      </View>
+      <View sx={{ mt: 3, mb: 3 }}>
+        <Data data={props.step.data} />
+      </View>
+      <View
+        sx={{ mt: 2, flexDirection: 'row', marginStart: 50, marginEnd: 50 }}
+      >
+        <View sx={{ flex: 1, padding: 2, alignItems: 'center' }}>
+          <TouchableOpacity onPress={() => handleChange('F')}>
+            <SVGFemaleComponent color={femaleIconColor} />
+            <View sx={{ alignItems: 'center' }}>
+              <Text>Female</Text>
             </View>
-            
-            <Text>Male</Text>
-            <Button 
-                title="Next"
-                onPress={() => handleInput('next')}
-            />
-            <Button 
-                    title="Prev"
-                    onPress={() => handleInput('prev')}
-            />
-        </>
-    )
+          </TouchableOpacity>
+        </View>
+        <View sx={{ flex: 1, padding: 2 }}>
+          <TouchableOpacity onPress={() => handleChange('M')}>
+            <SVGMaleComponent />
+            <View sx={{ alignItems: 'center' }}>
+              <Text>Male</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View>{errorMessage ? <Text>{errorMessage}</Text> : null}</View>
+      <View sx={{ mt: 5 }}>
+        <TouchableOpacity
+          style={isInputValidated ? styles.validatedInput : styles.button}
+          onPress={() => handlePress('next')}
+          disabled={!isInputValidated}
+        >
+          <Text
+            style={isInputValidated ? styles.validatedText : styles.btnText}
+          >
+            Next
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-    input: {
-        backgroundColor: 'pink',
-        margin: 15,
-        borderRadius: 4,
-        padding: 10
-    },
-    error: {
-        color: 'red'
-    }
+  scrollView: {
+    marginTop: 4,
+  },
+  input: {
+    // backgroundColor: '#FFF1EC',
+    // height: 40,
+    // margin: 12,
+    // padding: 10,
+    width: 300,
+    // borderRadius: 5,
+    //---------------------
+    backgroundColor: '#FFF1EC',
+    height: 40,
+    textAlign: 'center',
+    //  margin: 12,
+    //  padding: 10,
+    //  width: 160,
+    borderRadius: 5,
+    //   borderColor: "red",
+    //   borderWidth: 2
+  },
+  button: {
+    marginTop: 10,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: 'salmon',
+    width: 300,
+    height: 40,
+    alignItems: 'center',
+    padding: 5,
+  },
+  btnText: {
+    fontSize: 18,
+    color: 'salmon',
+  },
+  validatedText: {
+    fontSize: 18,
+    color: 'white',
+  },
+  validatedInput: {
+    backgroundColor: 'salmon',
+    text: 'white',
+    marginTop: 10,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: 'salmon',
+    width: 300,
+    height: 40,
+    alignItems: 'center',
+    padding: 5,
+  },
 })
 
-export default AddGender;
+export default AddGender

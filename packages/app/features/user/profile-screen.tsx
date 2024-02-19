@@ -14,49 +14,56 @@ import ProfileConstants from 'app/lib/ProfileConstants'
 import ProfileQuestions from 'app/lib/ProfileQuestions.json'
 import { Step } from 'app/types/Step'
 import { StyleSheet } from 'react-native'
-import axios from 'axios'
 
 type Key = keyof typeof ProfileQuestions
 
 const ProfileScreen = () => {
-  const [profile, setProfile] = useState<Profile>()
+  const [profile, setProfile] = useState<Profile | null>()
   const [currentStep, setCurrentStep] = useState<Step>(
     ProfileQuestions[ProfileConstants.INITIAL_STEP_ID as Key]
   )
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [token, setToken] = useState<string>('')
 
   useEffect(() => {
-    getProfile()
-  }, [currentStep])
+    getTemporaryProfile()
+    getToken()
+  }, [])
 
-  const getProfile = async () => {
+  const getToken = async () => {
     const token = await AsyncStorage.getItem('user')
-
     if (token) {
-      try {
-        const response: any = await axios.get(
-          'https://blushing-pajamas-bear.cyclic.app/api/profile',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-          }
-        )
-       
-        setProfile(response.data)
-        setIsLoading(false)
-      } catch (e) {
-        console.log(e)
-      }
+      setToken(token)
     }
   }
 
+  const getTemporaryProfile = async () => {
+    const profile = await AsyncStorage.getItem('temporaryProfile')
+    if (profile) {
+      // handle existing profile -> which should never happen
+    } 
+  }
+
   const saveInput = async (value: string | {}, action: string) => {
+    console.log('value ', value)
     const profileCopy: Profile = profile as Profile
-    let profileToSave = { ...profileCopy, [currentStep.key]: value }
+    let profileToSave: Profile = { ...profileCopy, [currentStep.key]: value }
     setProfile(profileToSave)
+    await AsyncStorage.setItem(
+      'temporaryProfile',
+      JSON.stringify(profileToSave),
+      () => {
+        AsyncStorage.mergeItem(
+          'temporaryProfile',
+          JSON.stringify(profileToSave),
+          async () => {
+            await AsyncStorage.getItem('temporaryProfile', (err, result) => {
+              console.log('tempProfile ', result)
+            })
+          }
+        )
+      }
+    )
     getNextQuestion(action)
   }
 
@@ -103,6 +110,7 @@ const ProfileScreen = () => {
           {currentStep.key === 'name' ? (
             <AddName
               step={currentStep}
+              saveInput={saveInput}
               navigateToNextStep={getNextQuestion}
               name={profile?.name}
             />
@@ -112,14 +120,15 @@ const ProfileScreen = () => {
               step={currentStep}
               saveInput={saveInput}
               navigateToPreviousStep={navigateToPreviousStep}
+              gender={profile?.gender}
             />
           ) : null}
           {currentStep.key === 'dateOfBirth' ? (
             <AddDateOfBirth
               step={currentStep}
-              navigateToNextStep={getNextQuestion}
-              dob={profile?.dob}
+              dateOfBirth={profile?.dateOfBirth}
               navigateToPreviousStep={navigateToPreviousStep}
+              saveInput={saveInput}
             />
           ) : null}
           {currentStep.key === 'location' ? (

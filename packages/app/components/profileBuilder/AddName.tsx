@@ -1,18 +1,18 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { useEffect, useState } from 'react'
 
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import Data from '../Data'
+import LockOrientation from '../../lib/utils/LockOrientation'
 import Prompt from '../Prompt'
 import { Step } from 'app/types/Step'
 import { TextInput } from 'react-native-paper'
 import { View } from 'dripsy'
-import axios from 'axios'
 
 type AddNameProps = {
   name: string | undefined
   step: Step
-  navigateToNextStep: any
+  navigateToNextStep: (action: string) => void
+  saveInput: (value: string, action: string) => void
 }
 
 const AddName = (props: AddNameProps) => {
@@ -20,20 +20,21 @@ const AddName = (props: AddNameProps) => {
   const [initialName, setInitialName] = useState<string | undefined>(props.name)
   const [errorMessage, setErrorMessage] = useState<string>('')
   const [isInputValidated, setIsInputValidated] = useState<boolean>(false)
-  const [token, setToken] = useState<any>()
+  const [orientation, setOrientation] = useState<number>(1)
 
+  //(/^[a-zA-Z\u00C0-\u00FF\u0100-\u017F\u0180-\u024F ']+(?:-[a-zA-Z\u00C0-\u00FF\u0100-\u017F\u0180-\u024F ']+){0,14}$/
+//.test(value))
+  
   useEffect(() => {
     if (name) {
       setIsInputValidated(true)
     }
-    getToken()
+    getOrientation()
   }, [])
 
-  const getToken = async () => {
-    const token = await AsyncStorage.getItem('user')
-    if (token) {
-      setToken(token)
-    }
+  const getOrientation = async () => {
+    const orientation = await LockOrientation()
+    setOrientation(orientation)
   }
 
   const handleInput = (action: string) => {
@@ -47,26 +48,10 @@ const AddName = (props: AddNameProps) => {
 
   const handlePress = async (action: string) => {
     if (initialName !== name) {
-      try {
-        await axios.post(
-          'https://blushing-pajamas-bear.cyclic.app/api/profile/name',
-          {
-            name,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-          }
-        )
-      } catch (e) {
-        console.log(e)
-      }
+      props.saveInput(name as string, action)
+    } else {
+      props.navigateToNextStep(action)
     }
-
-    props.navigateToNextStep(action)
   }
 
   return (
@@ -130,8 +115,6 @@ const styles = StyleSheet.create({
     // margin: 12,
     // padding: 10,
     width: 300,
-    // borderRadius: 5,
-    //---------------------
     backgroundColor: '#FFF1EC',
     height: 40,
     textAlign: 'center',

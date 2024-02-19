@@ -1,7 +1,7 @@
 export type Profile = {
     id: string,
     name: string,
-    dob: string,
+    dateOfBirth: string,
     gender: string,
     countryCode: string,
     location: {}

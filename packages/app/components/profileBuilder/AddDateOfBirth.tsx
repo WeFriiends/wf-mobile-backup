@@ -7,22 +7,20 @@ import {
 } from 'react-native'
 import { useEffect, useState } from 'react'
 
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import Data from '../Data'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import Prompt from '../Prompt'
 import { Step } from '../../types/Step'
 import { TextInput } from 'react-native-paper'
 import { View } from 'dripsy'
-import axios from 'axios'
 import dayjs from 'dayjs'
 import { differenceInYears } from 'date-fns'
 
 type AddDateOfBirthProps = {
   step: Step
-  navigateToNextStep: (action: string) => void
-  dob: string | undefined
+  dateOfBirth: string | undefined
   navigateToPreviousStep: (action: string) => void
+  saveInput: (value: string, action: string) => void
 }
 
 const AddDateOfBirth = (props: AddDateOfBirthProps) => {
@@ -31,23 +29,14 @@ const AddDateOfBirth = (props: AddDateOfBirthProps) => {
   const [isDatePickerVisible, setDatePickerVisibility] =
     useState<boolean>(false)
   const [formattedDate, setFormattedDate] = useState<string>(
-    dayjs(props.dob).format('YYYY-MM-DD')
+    dayjs(props.dateOfBirth).format('YYYY-MM-DD')
   )
-  const [token, setToken] = useState<string | undefined>()
 
   useEffect(() => {
-    if (formattedDate) {
+    if (props.dateOfBirth) {
       setIsInputValidated(true)
     }
-    getToken()
   }, [])
-
-  const getToken = async () => {
-    const token = await AsyncStorage.getItem('user')
-    if (token) {
-      setToken(token)
-    }
-  }
 
   const handleDateChange = (date: Date) => {
     const formattedDate = dayjs(date).format('YYYY-MM-DD')
@@ -67,26 +56,7 @@ const AddDateOfBirth = (props: AddDateOfBirthProps) => {
     setErrorMessage('')
     if (action === 'next') {
       if (formattedDate) {
-        try {
-          const response = await axios.post(
-            'https://blushing-pajamas-bear.cyclic.app/api/profile/dob',
-            {
-              day: formattedDate,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-              },
-            }
-          )
-          if (response.status === 200) {
-            props.navigateToNextStep(action)
-          }
-        } catch (e) {
-          console.log(e)
-        }
+        props.saveInput(formattedDate, action)
       }
     } else {
       props.navigateToPreviousStep(action)
@@ -102,13 +72,13 @@ const AddDateOfBirth = (props: AddDateOfBirthProps) => {
       <View>
         <Button title="Prev" onPress={() => handleInput('prev')} />
       </View>
-      <View sx={{ mt: 4 }}>
+      <View sx={{ mt: 3 }}>
         <Prompt text={props.step.prompt} />
       </View>
-      <View sx={{ mt: 4, mb: 4 }}>
+      <View sx={{ mt: 3, mb: 3 }}>
         <Data data={props.step.data} />
       </View>
-      <View>
+      <View sx={{ mt: 2 }}>
         <SafeAreaView>
           <TouchableOpacity
             onPress={() => {
@@ -148,6 +118,7 @@ const AddDateOfBirth = (props: AddDateOfBirthProps) => {
         <TouchableOpacity
           style={isInputValidated ? styles.validatedInput : styles.button}
           onPress={() => handleInput('next')}
+          disabled={!isInputValidated}
         >
           <Text
             style={isInputValidated ? styles.validatedText : styles.btnText}
