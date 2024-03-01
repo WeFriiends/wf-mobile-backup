@@ -45,7 +45,7 @@ const AddName = (props: AddNameProps) => {
   }
 
   const handlePress = async (action: string) => {
-    if (initialName !== name && !name) {
+    if (initialName !== name && name) {
       props.saveInput(name as string, action)
     } else {
       props.navigateToNextStep(action)
