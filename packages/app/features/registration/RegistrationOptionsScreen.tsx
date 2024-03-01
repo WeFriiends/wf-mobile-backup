@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { StyleSheet } from 'react-native'
-import { View } from 'dripsy'
+import { Button, Text } from 'react-native-paper'
 import { Link, TextLink } from 'solito/link'
-import { useRouter } from 'solito/router'
-import { createParam } from 'solito'
-import { Text, Button } from 'react-native-paper'
+import { useEffect, useState } from 'react'
+
 import FbOption from './fb/FbOption'
 import GoogleOption from './google/GoogleOption'
-import MailOption from './email/MailOption'
-import { RootStackParamList } from 'app/navigation/native'
 import LogoComponent from 'app/components/LogoComponent'
-import RegistrationOptionsHeader from './RegistrationOptionsHeader'
+import MailOption from './email/MailOption'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import RegistrationOptionsFooter from './RegistrationOptionsFooter'
+import RegistrationOptionsHeader from './RegistrationOptionsHeader'
+import { RootStackParamList } from 'app/navigation/native'
+import { StyleSheet } from 'react-native'
+import { View } from 'dripsy'
+import { createParam } from 'solito'
+import { useRouter } from 'solito/router'
 
 const RegistrationOptionsScreen = () => {
   const { push, back } = useRouter()
@@ -20,7 +21,7 @@ const RegistrationOptionsScreen = () => {
 
   const onPressSignIn = () => {
     setSignOption('signIn')
-    push('signIn')
+    push('/signIn')  //added "/"
   }
   const onPressBackSignUp = () => {
     setSignOption(undefined)
@@ -38,8 +39,8 @@ const RegistrationOptionsScreen = () => {
       <View style={styles.registrationContainer}>
         <RegistrationOptionsHeader signOption={signOption} />
         <View>
-          <FbOption />
-          <GoogleOption />
+          {/* <FbOption />
+          <GoogleOption /> */}
           <MailOption signOption={signOption} />
         </View>
         <RegistrationOptionsFooter

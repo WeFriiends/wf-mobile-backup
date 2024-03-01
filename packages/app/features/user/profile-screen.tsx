@@ -19,7 +19,7 @@ type Key = keyof typeof ProfileQuestions
 
 const ProfileScreen = () => {
   const [profile, setProfile] = useState<Profile | null>()
-  const [currentStep, setCurrentStep] = useState<Step>(
+const [currentStep, setCurrentStep] = useState<Step>(
     ProfileQuestions[ProfileConstants.INITIAL_STEP_ID as Key]
   )
   const [token, setToken] = useState<string>('')
