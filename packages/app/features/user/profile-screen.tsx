@@ -2,7 +2,7 @@ import { Text, View } from 'dripsy'
 import { useEffect, useState } from 'react'
 
 import AddDateOfBirth from '../../components/profileBuilder/AddDateOfBirth'
-import AddGender from '../../components/profileBuilder/AddGender';
+import AddGender from '../../components/profileBuilder/AddGender'
 import AddImages from '../../components/profileBuilder/AddImages'
 import AddLocation from '../../components/profileBuilder/AddLocation'
 import AddName from '../../components/profileBuilder/AddName'
@@ -14,51 +14,57 @@ import ProfileConstants from 'app/lib/ProfileConstants'
 import ProfileQuestions from 'app/lib/ProfileQuestions.json'
 import { Step } from 'app/types/Step'
 import { StyleSheet } from 'react-native'
-import { createParam } from 'solito'
 
 type Key = keyof typeof ProfileQuestions
 
 const ProfileScreen = () => {
-    console.log("rendered")
-  const [profile, setProfile] = useState<Profile>()
+  const [profile, setProfile] = useState<Profile | null>()
   const [currentStep, setCurrentStep] = useState<Step>(
     ProfileQuestions[ProfileConstants.INITIAL_STEP_ID as Key]
   )
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [token, setToken] = useState<string>('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    getProfile()
+    getToken()
+    getTemporaryProfile()
   }, [])
 
-  const getProfile = async () => {
-    console.log('get inside getProfile')
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGFmM2E0MjI2MDA2ZDc2ODE2YzAwYTciLCJ1c2VySWQiOiJuYXRhc29ibEBob3RtYWlsLmNvbSIsImlhdCI6MTY4OTIwNjI2NX0.x_eGbSkzo29bCCwtgdFmLdgJje2Ktq93beiPVdGcVsQ' //await AsyncStorage.getItem('token');
-    console.log("got token ", token)
+  const getToken = async () => {
+    const token = await AsyncStorage.getItem('userToken')
     if (token) {
-        const response = await fetch(
-            'https://blushing-pajamas-bear.cyclic.app/api/profile',
-            {
-              method: 'GET',
-              headers: {
-                Authorization: `Bearer ${token}`,
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-              },
-            }
-          )
-          let json = await response.json()
-          console.log(json)
-          setProfile(json)
-          
+      setToken(token)
     }
-  
-    setIsLoading(false)
+  }
+
+  const getTemporaryProfile = async () => {
+    const profile: Profile = JSON.parse(
+      (await AsyncStorage.getItem('temporaryProfile')) as string
+    )
+    if (profile) {
+      setProfile(profile)
+    }
   }
 
   const saveInput = async (value: string | {}, action: string) => {
     const profileCopy: Profile = profile as Profile
-    let profileToSave = { ...profileCopy, [currentStep.key]: value }
+    let profileToSave: Profile = { ...profileCopy, [currentStep.key]: value }
     setProfile(profileToSave)
+    await AsyncStorage.setItem(
+      'temporaryProfile',
+      JSON.stringify(profileToSave),
+      () => {
+        AsyncStorage.mergeItem(
+          'temporaryProfile',
+          JSON.stringify(profileToSave),
+          async () => {
+            await AsyncStorage.getItem('temporaryProfile', (err, result) => {
+              console.log('tempProfile ', result)
+            })
+          }
+        )
+      }
+    )
     getNextQuestion(action)
   }
 
@@ -67,7 +73,6 @@ const ProfileScreen = () => {
   }
 
   const getNextQuestion = (action: string) => {
-    console.log('in next question ', action)
     let nextStepId: string | null
     if (action === 'next') {
       nextStepId = currentStep.next
@@ -78,7 +83,6 @@ const ProfileScreen = () => {
     }
 
     if (nextStepId) {
-      console.log('in nextstep')
       const nextStep: Step = ProfileQuestions[nextStepId as Key]
       setCurrentStep(nextStep)
     }
@@ -107,6 +111,7 @@ const ProfileScreen = () => {
           {currentStep.key === 'name' ? (
             <AddName
               step={currentStep}
+              saveInput={saveInput}
               navigateToNextStep={getNextQuestion}
               name={profile?.name}
             />
