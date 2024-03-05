@@ -10,6 +10,9 @@ import { TextInput } from 'react-native-paper'
 import { View } from 'dripsy'
 import axios from 'axios'
 
+import NextStepButton from '../ui/NextStepButton'
+import PreviousStepButton from '../ui/PreviousStepButton'
+
 type AddNameProps = {
   name: string | undefined
   step: Step
@@ -105,7 +108,7 @@ const AddName = (props: AddNameProps) => {
         />
         {errorMessage ? <Text>{errorMessage}</Text> : null}
         <View sx={{ mt: 5 }}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={isInputValidated ? styles.validatedInput : styles.button}
             onPress={() => handleInput('next')}
           >
@@ -114,7 +117,14 @@ const AddName = (props: AddNameProps) => {
             >
               Next
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
+          <NextStepButton
+            isInputValidated={isInputValidated}
+            caption="next"
+            activeOpacity={1}
+            handleInput={handleInput}
+            action="next"
+          />
         </View>
       </View>
     </ScrollView>
@@ -143,36 +153,36 @@ const styles = StyleSheet.create({
     //   borderColor: "red",
     //   borderWidth: 2
   },
-  button: {
-    marginTop: 10,
-    borderWidth: 2,
-    borderRadius: 5,
-    borderColor: 'salmon',
-    width: 300,
-    height: 40,
-    alignItems: 'center',
-    padding: 5,
-  },
-  btnText: {
-    fontSize: 18,
-    color: 'salmon',
-  },
-  validatedText: {
-    fontSize: 18,
-    color: 'white',
-  },
-  validatedInput: {
-    backgroundColor: 'salmon',
-    text: 'white',
-    marginTop: 10,
-    borderWidth: 2,
-    borderRadius: 5,
-    borderColor: 'salmon',
-    width: 300,
-    height: 40,
-    alignItems: 'center',
-    padding: 5,
-  },
+  // button: {
+  //   marginTop: 10,
+  //   borderWidth: 2,
+  //   borderRadius: 5,
+  //   borderColor: 'salmon',
+  //   width: 300,
+  //   height: 40,
+  //   alignItems: 'center',
+  //   padding: 5,
+  // },
+  // btnText: {
+  //   fontSize: 18,
+  //   color: 'salmon',
+  // },
+  // validatedText: {
+  //   fontSize: 18,
+  //   color: 'white',
+  // },
+  // validatedInput: {
+  //   backgroundColor: 'salmon',
+  //   text: 'white',
+  //   marginTop: 10,
+  //   borderWidth: 2,
+  //   borderRadius: 5,
+  //   borderColor: 'salmon',
+  //   width: 300,
+  //   height: 40,
+  //   alignItems: 'center',
+  //   padding: 5,
+  // },
 })
 
 export default AddName

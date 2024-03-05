@@ -1,25 +1,31 @@
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
-import React, { useState } from 'react';
 
 type NextStepButtonProps = {
   isInputValidated: boolean,
-  handleInput: () => void;
+  handleInput: (action: string) => void;
+  caption: string;
+  activeOpacity: number;
+  action: string;
 };
 
 const NextStepButton = (props: NextStepButtonProps) => {
-  const { isInputValidated, handleInput } = props;
+  const { isInputValidated, handleInput, caption, activeOpacity, action } = props;
+
+  const buttonHandler = () => {
+    handleInput(action);
+  }
 
   return (
     <TouchableOpacity
-      style={isInputValidated ? styles.validatedInput : styles.button}
-      onPress={handleInput}
-      activeOpacity={1}
+      style={isInputValidated ? styles?.validatedInput : styles?.button}
+      onPress={buttonHandler}
+      activeOpacity={activeOpacity}
       disabled={!isInputValidated}
     >
       <Text
-        style={isInputValidated ? styles.validatedText : styles.btnText}
+        style={isInputValidated ? styles?.validatedText : styles?.btnText}
       >
-        Next
+        {caption}
       </Text>
     </TouchableOpacity>
   );
@@ -28,12 +34,22 @@ const NextStepButton = (props: NextStepButtonProps) => {
 export default NextStepButton;
 
 const styles = StyleSheet.create({
-  text: {
-    color: '#FFF',
+  button: {
+    marginTop: 10,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: 'salmon',
+    width: 300,
+    height: 40,
+    alignItems: 'center',
+  },
+  btnText: {
     fontSize: 18,
-    fontStyle: 'normal',
-    fontWeight: "600",
-    lineHeight: 24,
+    color: 'salmon',
+  },
+  validatedText: {
+    fontSize: 18,
+    color: 'white',
   },
   validatedInput: {
     backgroundColor: 'salmon',
@@ -45,24 +61,5 @@ const styles = StyleSheet.create({
     width: 300,
     height: 40,
     alignItems: 'center',
-    padding: 5,
   },
-  button: {
-    marginTop: 10,
-    borderWidth: 2,
-    borderRadius: 5,
-    borderColor: 'salmon',
-    width: 300,
-    height: 40,
-    alignItems: 'center',
-    padding: 5,
-  },
-  btnText: {
-    fontSize: 18,
-    color: 'salmon',
-  },
-  validatedText: {
-    fontSize: 18,
-    color: 'white',
-  },
-});
+})
