@@ -34,6 +34,10 @@ const ProfileScreen = () => {
     const token = await AsyncStorage.getItem('userToken')
     if (token) {
       setToken(token)
+    } else {
+      //I think here it should show error screen? IDeally user would never land on this page if there is no token
+      console.log('Token not found')
+      return
     }
   }
 
@@ -41,6 +45,7 @@ const ProfileScreen = () => {
     const profile: Profile = JSON.parse(
       (await AsyncStorage.getItem('temporaryProfile')) as string
     )
+    console.log('profile ', profile)
     if (profile) {
       setProfile(profile)
     }
@@ -50,22 +55,23 @@ const ProfileScreen = () => {
     const profileCopy: Profile = profile as Profile
     let profileToSave: Profile = { ...profileCopy, [currentStep.key]: value }
     setProfile(profileToSave)
+    mergeItemToAsyncStorage(profileToSave)
+    getNextQuestion(action)
+  }
+
+  const mergeItemToAsyncStorage = async (
+    profileToSave: Profile
+  ) => {
     await AsyncStorage.setItem(
       'temporaryProfile',
       JSON.stringify(profileToSave),
       () => {
         AsyncStorage.mergeItem(
           'temporaryProfile',
-          JSON.stringify(profileToSave),
-          async () => {
-            await AsyncStorage.getItem('temporaryProfile', (err, result) => {
-              console.log('tempProfile ', result)
-            })
-          }
+          JSON.stringify(profileToSave)
         )
       }
     )
-    getNextQuestion(action)
   }
 
   const navigateToPreviousStep = (action: string) => {
