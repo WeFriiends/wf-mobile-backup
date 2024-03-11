@@ -1,5 +1,5 @@
 import { TouchableOpacity, StyleSheet, Image } from 'react-native';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import BackArrowSVG from '../../lib/assets/BackArrowSVG';
 
 type PreviousStepButtonProps = {
