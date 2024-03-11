@@ -1,5 +1,6 @@
 import { TouchableOpacity, StyleSheet, Image } from 'react-native';
 import React, { useState } from 'react';
+import BackArrowSVG from '../../lib/assets/BackArrowSVG';
 
 type PreviousStepButtonProps = {
   handleInput: () => void;
@@ -24,7 +25,7 @@ const PreviousStepButton = (props: PreviousStepButtonProps) => {
       onPressOut={onPressOutHandler}
       activeOpacity={1}
     >
-      <Image style={styles.icon} source={require('./arrow_back.png')} />
+      <BackArrowSVG />
     </TouchableOpacity>
   );
 }
@@ -40,8 +41,4 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     cursor: 'pointer',
   },
-  icon: {
-    width: 25,
-    height: 25,
-  }
 });
