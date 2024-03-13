@@ -124,6 +124,7 @@ const AddName = (props: AddNameProps) => {
             activeOpacity={1}
             handleInput={handleInput}
             action="next"
+            style={nextStepButtonStyle}
           />
         </View>
       </View>
@@ -183,6 +184,37 @@ const styles = StyleSheet.create({
   //   alignItems: 'center',
   //   padding: 5,
   // },
+})
+
+const nextStepButtonStyle = StyleSheet.create({
+  button: {
+    marginTop: 10,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: 'salmon',
+    width: 300,
+    height: 40,
+    alignItems: 'center',
+  },
+  btnText: {
+    fontSize: 18,
+    color: 'salmon',
+  },
+  validatedText: {
+    fontSize: 18,
+    color: 'white',
+  },
+  validatedInput: {
+    backgroundColor: 'salmon',
+    text: 'white',
+    marginTop: 10,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: 'salmon',
+    width: 300,
+    height: 40,
+    alignItems: 'center',
+  },
 })
 
 export default AddName
