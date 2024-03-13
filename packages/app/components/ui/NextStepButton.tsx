@@ -2,11 +2,11 @@ import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
 type NextStepButtonProps = {
   isInputValidated: boolean,
-  handleInput: (action: string) => void;
-  caption: string;
-  activeOpacity: number;
-  action: string;
-  style: {
+  handleInput: (action: string) => void,
+  action: string,
+  caption: string,
+  activeOpacity: number,
+  styles: {
     button: {
       marginTop: number;
       borderWidth: number;
@@ -14,7 +14,7 @@ type NextStepButtonProps = {
       borderColor: string;
       width: number;
       height: number;
-      alignItems: string;
+      alignItems: any;
     };
     btnText: {
       fontSize: number;
@@ -26,20 +26,20 @@ type NextStepButtonProps = {
     };
     validatedInput: {
       backgroundColor: string;
-      text: string;
+      color: string;
       marginTop: number;
       borderWidth: number;
       borderRadius: number;
       borderColor: string;
       width: number;
       height: number;
-      alignItems: string;
+      alignItems: any;
     };
   },
 };
 
 const NextStepButton = (props: NextStepButtonProps) => {
-  const { isInputValidated, handleInput, caption, activeOpacity, action, style } = props;
+  const { isInputValidated, handleInput, caption, activeOpacity, action, styles } = props;
 
   const buttonHandler = () => {
     handleInput(action);
@@ -47,13 +47,13 @@ const NextStepButton = (props: NextStepButtonProps) => {
 
   return (
     <TouchableOpacity
-      style={isInputValidated ? style?.validatedInput : style?.button}
+      style={isInputValidated ? styles?.validatedInput : styles?.button}
       onPress={buttonHandler}
       activeOpacity={activeOpacity}
       disabled={!isInputValidated}
     >
       <Text
-        style={isInputValidated ? style?.validatedText : style?.btnText}
+        style={isInputValidated ? styles?.validatedText : styles?.btnText}
       >
         {caption}
       </Text>

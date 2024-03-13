@@ -124,8 +124,13 @@ const AddName = (props: AddNameProps) => {
             activeOpacity={1}
             handleInput={handleInput}
             action="next"
-            style={nextStepButtonStyle}
+            styles={nextStepButtonStyle}
           />
+          {/* <PreviousStepButton
+            handleInput={handleInput}
+            action="prev"
+            styles={prevStepButtonStyle}
+          /> */}
         </View>
       </View>
     </ScrollView>
@@ -206,7 +211,7 @@ const nextStepButtonStyle = StyleSheet.create({
   },
   validatedInput: {
     backgroundColor: 'salmon',
-    text: 'white',
+    color: 'white',
     marginTop: 10,
     borderWidth: 2,
     borderRadius: 5,
@@ -214,6 +219,17 @@ const nextStepButtonStyle = StyleSheet.create({
     width: 300,
     height: 40,
     alignItems: 'center',
+  },
+})
+
+const prevStepButtonStyle = StyleSheet.create({
+  circle: {
+    width: 45,
+    height: 45,
+    borderRadius: 50,
+    paddingTop: 11,
+    paddingLeft: 10,
+    cursor: 'pointer',
   },
 })
 
