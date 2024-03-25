@@ -1,6 +1,7 @@
 import GladScreen from '../../features/registration/glad-screen/GladScreen'
 import { HomeScreen } from '../../features/home/screen'
 import MailCreds from '../../features/registration/email/MailCredsContainer'
+import MenSearchScreen from '../../features/search/men-search-screen'
 import ProfileScreen from 'app/features/user/profile-screen'
 import RegistrationOptionsScreen from '../../features/registration/RegistrationOptionsScreen'
 import { UserDetailScreen } from '../../features/user/detail-screen'
@@ -19,6 +20,9 @@ export type RootStackParamList = {
     id: string
   }
   'user-profile': {
+    id: string
+  }
+  'user-search': {
     id: string
   }
 }
@@ -76,6 +80,13 @@ export function NativeNavigation() {
         component={ProfileScreen}
         options={{
           title: 'User Profile',
+        }}
+      />
+      <Stack.Screen
+        name="user-search"
+        component={MenSearchScreen}
+        options={{
+          title: 'Men Search'
         }}
       />
     </Stack.Navigator>
