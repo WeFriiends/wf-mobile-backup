@@ -14,7 +14,7 @@ type NextStepButtonProps = {
       borderColor: string;
       width: number;
       height: number;
-      alignItems: any;
+      alignItems: string;
     };
     btnText: {
       fontSize: number;
@@ -33,7 +33,7 @@ type NextStepButtonProps = {
       borderColor: string;
       width: number;
       height: number;
-      alignItems: any;
+      alignItems: string;
     };
   },
 };
@@ -41,14 +41,14 @@ type NextStepButtonProps = {
 const NextStepButton = (props: NextStepButtonProps) => {
   const { isInputValidated, handleInput, caption, activeOpacity, action, styles } = props;
 
-  const buttonHandler = () => {
+  const onPressHandler = () => {
     handleInput(action);
   }
 
   return (
     <TouchableOpacity
       style={isInputValidated ? styles?.validatedInput : styles?.button}
-      onPress={buttonHandler}
+      onPress={onPressHandler}
       activeOpacity={activeOpacity}
       disabled={!isInputValidated}
     >
@@ -62,34 +62,3 @@ const NextStepButton = (props: NextStepButtonProps) => {
 }
 
 export default NextStepButton;
-
-// const styles = StyleSheet.create({
-//   button: {
-//     marginTop: 10,
-//     borderWidth: 2,
-//     borderRadius: 5,
-//     borderColor: 'salmon',
-//     width: 300,
-//     height: 40,
-//     alignItems: 'center',
-//   },
-//   btnText: {
-//     fontSize: 18,
-//     color: 'salmon',
-//   },
-//   validatedText: {
-//     fontSize: 18,
-//     color: 'white',
-//   },
-//   validatedInput: {
-//     backgroundColor: 'salmon',
-//     text: 'white',
-//     marginTop: 10,
-//     borderWidth: 2,
-//     borderRadius: 5,
-//     borderColor: 'salmon',
-//     width: 300,
-//     height: 40,
-//     alignItems: 'center',
-//   },
-// })
