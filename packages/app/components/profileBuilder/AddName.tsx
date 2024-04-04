@@ -11,7 +11,6 @@ import { View } from 'dripsy'
 import axios from 'axios'
 
 import NextStepButton from '../ui/NextStepButton'
-import PreviousStepButton from '../ui/PreviousStepButton'
 
 type AddNameProps = {
   name: string | undefined
