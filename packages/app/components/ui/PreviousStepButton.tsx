@@ -44,14 +44,3 @@ const PreviousStepButton = (props: PreviousStepButtonProps) => {
 }
 
 export default PreviousStepButton;
-
-// const styles = StyleSheet.create({
-//   circle: {
-//     width: 45,
-//     height: 45,
-//     borderRadius: 50,
-//     paddingTop: 11,
-//     paddingLeft: 10,
-//     cursor: 'pointer',
-//   },
-// });
