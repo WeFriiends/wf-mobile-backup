@@ -1,64 +1,61 @@
-import { TouchableOpacity, StyleSheet, Text } from 'react-native';
-
+import {
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  ViewStyle,
+  StyleProp,
+  TextStyle,
+} from 'react-native'
+import { CSSProperties } from 'react'
 type NextStepButtonProps = {
-  isInputValidated: boolean,
-  handleInput: (action: string) => void,
-  action: string,
-  caption: string,
-  activeOpacity: number,
-  styles: {
-    button: {
-      marginTop: number;
-      borderWidth: number;
-      borderRadius: number;
-      borderColor: string;
-      width: number;
-      height: number;
-      alignItems: string;
-    };
-    btnText: {
-      fontSize: number;
-      color: string;
-    };
-    validatedText: {
-      fontSize: number;
-      color: string;
-    };
-    validatedInput: {
-      backgroundColor: string;
-      color: string;
-      marginTop: number;
-      borderWidth: number;
-      borderRadius: number;
-      borderColor: string;
-      width: number;
-      height: number;
-      alignItems: string;
-    };
-  },
-};
+  isInputValidated: boolean
+  handleInput: (action: string) => void
+  action: string
+  caption: string
+  activeOpacity: number
+  styles?: StyleProp<ViewStyle> | StyleProp<TextStyle>
+}
 
 const NextStepButton = (props: NextStepButtonProps) => {
-  const { isInputValidated, handleInput, caption, activeOpacity, action, styles } = props;
+  const {
+    isInputValidated,
+    handleInput,
+    caption,
+    activeOpacity,
+    action,
+    styles,
+  } = props
 
   const onPressHandler = () => {
-    handleInput(action);
+    handleInput(action)
   }
 
   return (
     <TouchableOpacity
-      style={isInputValidated ? styles?.validatedInput : styles?.button}
+      style={[defaultStyle.button, styles]}
       onPress={onPressHandler}
       activeOpacity={activeOpacity}
       disabled={!isInputValidated}
     >
-      <Text
-        style={isInputValidated ? styles?.validatedText : styles?.btnText}
-      >
-        {caption}
-      </Text>
+      <Text style={[defaultStyle.btnText, styles]}>{caption}</Text>
     </TouchableOpacity>
-  );
+  )
 }
 
-export default NextStepButton;
+const defaultStyle = StyleSheet.create({
+  button: {
+    marginTop: 10,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: 'salmon',
+    width: 300,
+    height: 40,
+    alignItems: 'center',
+  },
+  btnText: {
+    fontSize: 18,
+    color: 'salmon',
+  },
+})
+
+export default NextStepButton

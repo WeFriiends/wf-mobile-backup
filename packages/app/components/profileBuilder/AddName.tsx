@@ -123,7 +123,11 @@ const AddName = (props: AddNameProps) => {
             activeOpacity={1}
             handleInput={handleInput}
             action="next"
-            styles={nextStepButtonStyle}
+            styles={
+              isInputValidated &&
+              nextStepButtonStyle.validatedInput &&
+              nextStepButtonStyle.validatedText
+            }
           />
           {/* <PreviousStepButton
             handleInput={handleInput}
@@ -191,19 +195,6 @@ const styles = StyleSheet.create({
 })
 
 const nextStepButtonStyle = StyleSheet.create({
-  button: {
-    marginTop: 10,
-    borderWidth: 2,
-    borderRadius: 5,
-    borderColor: 'salmon',
-    width: 300,
-    height: 40,
-    alignItems: 'center',
-  },
-  btnText: {
-    fontSize: 18,
-    color: 'salmon',
-  },
   validatedText: {
     fontSize: 18,
     color: 'white',
