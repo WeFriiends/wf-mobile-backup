@@ -20,7 +20,8 @@ const WRONG_INPUT_ERROR_MESSAGE =
 const INPUT_LENGTH_ERROR_MESSAGE =
   'This field must contain between 2 and 15 characters'
 
-const NAME_REGEX: RegExp = /^\s*(?:[\p{L}'-]+(?:[-\s][\p{L}'-]+)?){2,15}\s*$/u
+const NAME_REGEX: RegExp = /^\s*(?:[\p{L}\s'-]+(?:[-\s][\p{L}\s'-]+)?){2,15}\s*$/u
+// /^\s*(?:[\p{L}'-]+(?:[-\s][\p{L}'-]+)?){2,15}\s*$/u
 
 const AddName = (props: AddNameProps) => {
   const [name, setName] = useState<string>('')
@@ -45,26 +46,26 @@ const AddName = (props: AddNameProps) => {
   }
 
   const handlePress = async (action: string) => {
-    if (initialName !== name && name) {
-      props.saveInput(name as string, action)
+    if (initialName !== name.trim() && name) {
+      props.saveInput(name.trim() as string, action)
     } else {
       props.navigateToNextStep(action)
     }
   }
 
   const handleInput = (value: string) => {
-    if (NAME_REGEX.test(value.trim())) {
-      setIsInputValidated(true)
-      setErrorMessage('')
-    } else if (value.length < 2) {
+    if (value.trim().length < 2 ) {
       setIsInputValidated(false)
       setErrorMessage(INPUT_LENGTH_ERROR_MESSAGE)
+    } else if (NAME_REGEX.test(value)) {
+      setIsInputValidated(true)
+      setErrorMessage('')
     } else {
       setIsInputValidated(false)
       setErrorMessage(WRONG_INPUT_ERROR_MESSAGE)
     }
 
-    setName(value.trim())
+    setName(value)
   }
 
   return (
