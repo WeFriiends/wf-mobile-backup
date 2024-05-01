@@ -20,8 +20,9 @@ const WRONG_INPUT_ERROR_MESSAGE =
 const INPUT_LENGTH_ERROR_MESSAGE =
   'This field must contain between 2 and 15 characters'
 
-const NAME_REGEX: RegExp = /^\s*(?:[\p{L}\s'-]+(?:[-\s][\p{L}\s'-]+)?){2,15}\s*$/u
-// /^\s*(?:[\p{L}'-]+(?:[-\s][\p{L}'-]+)?){2,15}\s*$/u
+const NAME_REGEX: RegExp = /^\s*(?:(?!\s\s)[\p{L}'-]{2,}|[\p{L}'-]\s[\p{L}'-]+)(?:\s[\p{L}'-]+)?\s*$/u
+
+// /^\s*(?:(?!\s\s)[\p{L}'-]{2,}(?:\s[\p{L}'-]+)?){1,15}\s*$/u
 
 const AddName = (props: AddNameProps) => {
   const [name, setName] = useState<string>('')
@@ -37,7 +38,7 @@ const AddName = (props: AddNameProps) => {
   }, [props.name])
 
   const onSubmit = (action: string) => {
-    if (NAME_REGEX.test(name as string)) {
+    if (NAME_REGEX.test(name.trim() as string)) {
       handlePress(action)
       setErrorMessage('')
     } else {
@@ -57,7 +58,7 @@ const AddName = (props: AddNameProps) => {
     if (value.trim().length < 2 ) {
       setIsInputValidated(false)
       setErrorMessage(INPUT_LENGTH_ERROR_MESSAGE)
-    } else if (NAME_REGEX.test(value)) {
+    } else if (NAME_REGEX.test(value.trim())) {
       setIsInputValidated(true)
       setErrorMessage('')
     } else {
@@ -99,8 +100,9 @@ const AddName = (props: AddNameProps) => {
         </View>
         <View sx={{ mt: 5 }}>
           <TouchableOpacity
-            style={isInputValidated ? styles.validatedInput : styles.button}
+            style={ isInputValidated ? styles.validatedInput : styles.button}
             onPress={() => onSubmit('next')}
+            disabled={!isInputValidated}
           >
             <Text
               style={isInputValidated ? styles.validatedText : styles.btnText}
