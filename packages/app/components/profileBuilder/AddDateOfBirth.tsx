@@ -15,6 +15,7 @@ import { TextInput } from 'react-native-paper'
 import { View } from 'dripsy'
 import dayjs from 'dayjs'
 import { differenceInYears } from 'date-fns'
+import ErrorIndicator from '../ErrorIndicator'
 
 type AddDateOfBirthProps = {
   step: Step
@@ -101,7 +102,7 @@ const AddDateOfBirth = (props: AddDateOfBirthProps) => {
           </TouchableOpacity>
           <View>
             {errorMessage ? (
-              <Text style={styles.error}>{errorMessage}</Text>
+              <ErrorIndicator errorMessage={errorMessage} color={'red'}/>
             ) : null}
           </View>
           <DateTimePickerModal
@@ -132,9 +133,6 @@ const AddDateOfBirth = (props: AddDateOfBirthProps) => {
 }
 
 const styles = StyleSheet.create({
-  error: {
-    color: 'red',
-  },
   input: {
     backgroundColor: '#FFF1EC',
     height: 40,
