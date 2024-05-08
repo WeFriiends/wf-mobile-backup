@@ -22,26 +22,33 @@ const ProfileScreen = () => {
   const [currentStep, setCurrentStep] = useState<Step>(
     ProfileQuestions[ProfileConstants.INITIAL_STEP_ID as Key]
   )
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [token, setToken] = useState<string>('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    getTemporaryProfile()
     getToken()
+    getTemporaryProfile()
   }, [])
 
   const getToken = async () => {
-    const token = await AsyncStorage.getItem('user')
+    const token = await AsyncStorage.getItem('userToken')
     if (token) {
       setToken(token)
+    } else {
+      //I think here it should show error screen? IDeally user would never land on this page if there is no token
+      console.log('Token not found')
+      return
     }
   }
 
   const getTemporaryProfile = async () => {
-    const profile = await AsyncStorage.getItem('temporaryProfile')
+    const profile: Profile = JSON.parse(
+      (await AsyncStorage.getItem('temporaryProfile')) as string
+    )
+    console.log('profile ', profile)
     if (profile) {
-      // handle existing profile -> which should never happen
-    } 
+      setProfile(profile)
+    }
   }
 
   const saveInput = async (value: string | {}, action: string) => {
@@ -49,22 +56,23 @@ const ProfileScreen = () => {
     const profileCopy: Profile = profile as Profile
     let profileToSave: Profile = { ...profileCopy, [currentStep.key]: value }
     setProfile(profileToSave)
+    mergeItemToAsyncStorage(profileToSave)
+    getNextQuestion(action)
+  }
+
+  const mergeItemToAsyncStorage = async (
+    profileToSave: Profile
+  ) => {
     await AsyncStorage.setItem(
       'temporaryProfile',
       JSON.stringify(profileToSave),
       () => {
         AsyncStorage.mergeItem(
           'temporaryProfile',
-          JSON.stringify(profileToSave),
-          async () => {
-            await AsyncStorage.getItem('temporaryProfile', (err, result) => {
-              console.log('tempProfile ', result)
-            })
-          }
+          JSON.stringify(profileToSave)
         )
       }
     )
-    getNextQuestion(action)
   }
 
   const navigateToPreviousStep = (action: string) => {
