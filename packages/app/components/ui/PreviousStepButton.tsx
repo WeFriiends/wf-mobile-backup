@@ -9,13 +9,13 @@ import { useState } from 'react';
 import BackArrowSVG from '../../lib/assets/BackArrowSVG';
 
 type PreviousStepButtonProps = {
-  handleInput: (action: string) => void,
+  onSubmit: (action: string) => void,
   action: string,
   styles?: StyleProp<ViewStyle> | StyleProp<TextStyle>
 };
 
 const PreviousStepButton = (props: PreviousStepButtonProps) => {
-  const { handleInput, action, styles } = props;
+  const { onSubmit, action, styles } = props;
 
   const [isPressed, setIsPressed] = useState<boolean>(false);
 
@@ -25,7 +25,7 @@ const PreviousStepButton = (props: PreviousStepButtonProps) => {
 
   const onPressOutHandler = () => {
     setIsPressed(false);
-    handleInput(action);
+    onSubmit(action);
   };
 
   return (
