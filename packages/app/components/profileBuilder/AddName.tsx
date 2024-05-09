@@ -101,21 +101,11 @@ const AddName = (props: AddNameProps) => {
           {errorMessage ? <ErrorIndicator color={'#F1562A'} errorMessage={errorMessage} /> : null}
         </View>
         <View sx={{ mt: 5 }}>
-          {/* <TouchableOpacity
-            style={isInputValidated ? styles.validatedInput : styles.button}
-            onPress={() => handleInput('next')}
-          >
-            <Text
-              style={isInputValidated ? styles.validatedText : styles.btnText}
-            >
-              Next
-            </Text>
-          </TouchableOpacity> */}
           <NextStepButton
             isInputValidated={isInputValidated}
             caption="next"
             activeOpacity={1}
-            handleInput={handleInput}
+            onSubmit={onSubmit}
             action="next"
             styles={
               isInputValidated &&
@@ -123,11 +113,6 @@ const AddName = (props: AddNameProps) => {
               nextStepButtonStyle.validatedText
             }
           />
-          {/* <PreviousStepButton
-            handleInput={handleInput}
-            action="prev"
-            styles={prevStepButtonStyle}
-          /> */}
         </View>
       </View>
     </ScrollView>
@@ -149,42 +134,12 @@ const styles = StyleSheet.create({
     width: 300,
     marginTop:5,
   },
-  // button: {
-  //   marginTop: 10,
-  //   borderWidth: 2,
-  //   borderRadius: 5,
-  //   borderColor: 'salmon',
-  //   width: 300,
-  //   height: 40,
-  //   alignItems: 'center',
-  //   padding: 5,
-  // },
-  // btnText: {
-  //   fontSize: 18,
-  //   color: 'salmon',
-  // },
-  // validatedText: {
-  //   fontSize: 18,
-  //   color: 'white',
-  // },
-  // validatedInput: {
-  //   backgroundColor: 'salmon',
-  //   text: 'white',
-  //   marginTop: 10,
-  //   borderWidth: 2,
-  //   borderRadius: 5,
-  //   borderColor: 'salmon',
-  //   width: 300,
-  //   height: 40,
-  //   alignItems: 'center',
-  //   padding: 5,
-  // },
 })
 
 const nextStepButtonStyle = StyleSheet.create({
   validatedText: {
     fontSize: 18,
-    color: 'white',
+    color: 'salmon',
   },
   validatedInput: {
     backgroundColor: 'salmon',
