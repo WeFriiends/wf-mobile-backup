@@ -9,7 +9,7 @@ import {
 import { CSSProperties } from 'react'
 type NextStepButtonProps = {
   isInputValidated: boolean
-  handleInput: (action: string) => void
+  onSubmit: (action: string) => void
   action: string
   caption: string
   activeOpacity: number
@@ -19,7 +19,7 @@ type NextStepButtonProps = {
 const NextStepButton = (props: NextStepButtonProps) => {
   const {
     isInputValidated,
-    handleInput,
+    onSubmit,
     caption,
     activeOpacity,
     action,
@@ -27,7 +27,7 @@ const NextStepButton = (props: NextStepButtonProps) => {
   } = props
 
   const onPressHandler = () => {
-    handleInput(action)
+    onSubmit(action)
   }
 
   return (
