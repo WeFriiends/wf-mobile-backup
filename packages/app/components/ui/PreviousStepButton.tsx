@@ -11,16 +11,6 @@ import BackArrowSVG from '../../lib/assets/BackArrowSVG';
 type PreviousStepButtonProps = {
   handleInput: (action: string) => void,
   action: string,
-  // styles: {
-  //   circle: {
-  //     width: number,
-  //     height: number,
-  //     borderRadius: number,
-  //     paddingTop: number,
-  //     paddingLeft: number,
-  //     cursor: string,
-  //   }
-  // }
   styles?: StyleProp<ViewStyle> | StyleProp<TextStyle>
 };
 
@@ -30,12 +20,10 @@ const PreviousStepButton = (props: PreviousStepButtonProps) => {
   const [isPressed, setIsPressed] = useState<boolean>(false);
 
   const onPressInHandler = () => {
-    console.log("in")
     setIsPressed(true);
   };
 
   const onPressOutHandler = () => {
-    console.log("out")
     setIsPressed(false);
     handleInput(action);
   };
