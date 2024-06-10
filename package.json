@@ -15,5 +15,8 @@
   "scripts": {
     "native": "cd apps/expo && expo start",
     "web": "cd apps/next && yarn next"
+  },
+  "dependencies": {
+    "expo-dev-client": "^2.4.12"
   }
 }
