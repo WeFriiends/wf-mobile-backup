@@ -7,6 +7,7 @@ import Prompt from '../Prompt'
 import { Step } from 'app/types/Step'
 import { TextInput } from 'react-native-paper'
 import { View } from 'dripsy'
+import LockOrientation from '../../lib/utils/LockOrientation'
 
 import NextStepButton from '../ui/NextStepButton'
 
@@ -31,14 +32,25 @@ const AddName = (props: AddNameProps) => {
   const [initialName, setInitialName] = useState<string | undefined>(props.name)
   const [errorMessage, setErrorMessage] = useState<string>('')
   const [isInputValidated, setIsInputValidated] = useState<boolean>(false)
+  const [orientation, setOrientation] = useState<number>(1)
 
+
+  //(/^[a-zA-Z\u00C0-\u00FF\u0100-\u017F\u0180-\u024F ']+(?:-[a-zA-Z\u00C0-\u00FF\u0100-\u017F\u0180-\u024F ']+){0,14}$/
+//.test(value))
+  
   useEffect(() => {
     if (props.name) {
       setName(props.name)
       setIsInputValidated(true)
     }
+    getOrientation()
   }, [props.name])
 
+  const getOrientation = async () => {
+    const orientation = await LockOrientation()
+    setOrientation(orientation)
+  }
+  
   const onSubmit = (action: string) => {
     if (NAME_REGEX.test(name.trim() as string)) {
       handlePress(action)

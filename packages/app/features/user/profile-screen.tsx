@@ -18,7 +18,6 @@ import { StyleSheet } from 'react-native'
 type Key = keyof typeof ProfileQuestions
 
 const ProfileScreen = () => {
-
   const [profile, setProfile] = useState<Profile | null>()
   const [currentStep, setCurrentStep] = useState<Step>(
     ProfileQuestions[ProfileConstants.INITIAL_STEP_ID as Key]
@@ -53,6 +52,7 @@ const ProfileScreen = () => {
   }
 
   const saveInput = async (value: string | {}, action: string) => {
+    console.log('value ', value)
     const profileCopy: Profile = profile as Profile
     let profileToSave: Profile = { ...profileCopy, [currentStep.key]: value }
     setProfile(profileToSave)
@@ -128,13 +128,15 @@ const ProfileScreen = () => {
               step={currentStep}
               saveInput={saveInput}
               navigateToPreviousStep={navigateToPreviousStep}
+              gender={profile?.gender}
             />
           ) : null}
           {currentStep.key === 'dateOfBirth' ? (
             <AddDateOfBirth
               step={currentStep}
-              navigateToNextStep={getNextQuestion}
-              dob={profile?.dateOfBirth}
+              dateOfBirth={profile?.dateOfBirth}
+              navigateToPreviousStep={navigateToPreviousStep}
+              saveInput={saveInput}
             />
           ) : null}
           {currentStep.key === 'location' ? (
