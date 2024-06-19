@@ -15,15 +15,18 @@ type AddGenderProps = {
   gender: string | undefined
 }
 
+const DEFAULT_COLOR = '#F2F4F5'
+const SELECTED_COLOR = '#FFF1EC'
+
 const AddGender = (props: AddGenderProps) => {
   const [gender, setGender] = useState<string | undefined>(props.gender)
   const [errorMessage, setErrorMessage] = useState<string>('')
   const [isInputValidated, setIsInputValidated] = useState<boolean>(false)
-  const [femaleIconColor, setFemaleIconColor] = useState<string>('#F2F4F5')
+  const [selectedColor, setSelectedColor] = useState<string>('')
 
   useEffect(() => {
     if (gender) {
-      if (gender === 'F') setFemaleIconColor('#FFF1EC')
+      setSelectedColor(SELECTED_COLOR)
       setIsInputValidated(true)
     }
   }, [])
@@ -41,12 +44,7 @@ const AddGender = (props: AddGenderProps) => {
   }
 
   const handleChange = (gender: string) => {
-    console.log('gender ', gender)
-    if (gender === 'F') {
-      setFemaleIconColor('#FFF1EC')
-    } else {
-      setFemaleIconColor('#F2F4F5')
-    }
+    gender ? setSelectedColor(SELECTED_COLOR) : setSelectedColor('')
     setGender(gender)
     setIsInputValidated(true)
     setErrorMessage('')
@@ -68,7 +66,7 @@ const AddGender = (props: AddGenderProps) => {
       >
         <View sx={{ flex: 1, padding: 2, alignItems: 'center' }}>
           <TouchableOpacity onPress={() => handleChange('F')}>
-            <SVGFemaleComponent color={femaleIconColor} />
+            <SVGFemaleComponent color={gender === "F" ? selectedColor : DEFAULT_COLOR} />
             <View sx={{ alignItems: 'center' }}>
               <Text>Female</Text>
             </View>
@@ -76,7 +74,7 @@ const AddGender = (props: AddGenderProps) => {
         </View>
         <View sx={{ flex: 1, padding: 2 }}>
           <TouchableOpacity onPress={() => handleChange('M')}>
-            <SVGMaleComponent />
+            <SVGMaleComponent color={gender === "M"? selectedColor : DEFAULT_COLOR}/>
             <View sx={{ alignItems: 'center' }}>
               <Text>Male</Text>
             </View>
@@ -143,7 +141,7 @@ const styles = StyleSheet.create({
   },
   validatedInput: {
     backgroundColor: 'salmon',
-    text: 'white',
+  //  text: 'white',
     marginTop: 10,
     borderWidth: 2,
     borderRadius: 5,

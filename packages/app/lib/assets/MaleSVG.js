@@ -2,7 +2,7 @@ import { SvgXml } from 'react-native-svg'
 
 const SVGMaleComponent = (props) => {
   const svgXml = `<svg width="100" height="100" viewBox="0 0 99 80" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <ellipse cx="49.1803" cy="40" rx="49.1803" ry="50" fill="#F2F4F5" />
+    <ellipse cx="49.1803" cy="40" rx="49.1803" ry="50" fill="${props.color}" />
     <rect x="2.8525" y="2.6721" width="99.6557" height="100.6557" fill="url(#pattern0)" />
     <defs>
       <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
