@@ -6,14 +6,14 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native'
-import { CSSProperties } from 'react'
+
 type NextStepButtonProps = {
   isInputValidated: boolean
   onSubmit: (action: string) => void
   action: string
   caption: string
   activeOpacity: number
-  styles?: StyleProp<ViewStyle> | StyleProp<TextStyle>
+  styles: StyleProp<ViewStyle> | StyleProp<TextStyle>
 }
 
 const NextStepButton = (props: NextStepButtonProps) => {
@@ -51,6 +51,7 @@ const defaultStyle = StyleSheet.create({
     width: 300,
     height: 40,
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   btnText: {
     fontSize: 18,
