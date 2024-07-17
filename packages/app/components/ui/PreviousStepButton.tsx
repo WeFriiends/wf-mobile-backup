@@ -1,32 +1,46 @@
-import { TouchableOpacity, StyleSheet, Image } from 'react-native';
-import React, { useState } from 'react';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  ViewStyle,
+  StyleProp,
+  TextStyle,
+} from 'react-native';
+import { useState } from 'react';
+import BackArrowSVG from '../../lib/assets/BackArrowSVG';
 
-const PreviousStepButton = () => {
-  const [isPressed, setIsPressed] = useState(false);
+type PreviousStepButtonProps = {
+  onSubmit: (action: string) => void,
+  action: string,
+  styles?: StyleProp<ViewStyle> | StyleProp<TextStyle>
+};
 
-   const onPressInHandler = () => {
+const PreviousStepButton = (props: PreviousStepButtonProps) => {
+  const { onSubmit, action, styles } = props;
+
+  const [isPressed, setIsPressed] = useState<boolean>(false);
+
+  const onPressInHandler = () => {
     setIsPressed(true);
   };
 
   const onPressOutHandler = () => {
     setIsPressed(false);
+    onSubmit(action);
   };
 
   return (
     <TouchableOpacity
-      style={[styles.circle, { backgroundColor: isPressed ? '#FB8F67' : '#FEDED2' }]}
+      style={[defaultStyle.circle, styles, { backgroundColor: isPressed ? '#FB8F67' : '#FEDED2' }]}
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}
       activeOpacity={1}
     >
-      <Image style={styles.icon} source={require('./arrow_back.svg')} />
+      <BackArrowSVG />
     </TouchableOpacity>
   );
 }
 
-export default PreviousStepButton;
-
-const styles = StyleSheet.create({
+const defaultStyle = StyleSheet.create({
   circle: {
     width: 45,
     height: 45,
@@ -35,8 +49,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     cursor: 'pointer',
   },
-  icon: {
-    width: 25,
-    height: 25,
-  }
-});
+})
+
+export default PreviousStepButton;
