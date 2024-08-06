@@ -1,54 +1,62 @@
 import {
   TouchableOpacity,
   StyleSheet,
+  Text,
   ViewStyle,
   StyleProp,
   TextStyle,
-} from 'react-native';
-import { useState } from 'react';
-import BackArrowSVG from '../../lib/assets/BackArrowSVG';
+} from 'react-native'
 
-type PreviousStepButtonProps = {
-  onSubmit: (action: string) => void,
-  action: string,
-  styles?: StyleProp<ViewStyle> | StyleProp<TextStyle>
-};
+type NextStepButtonProps = {
+  isInputValidated: boolean
+  onSubmit: (action: string) => void
+  action: string
+  caption: string
+  activeOpacity: number
+  styles: StyleProp<ViewStyle> | StyleProp<TextStyle>
+}
 
-const PreviousStepButton = (props: PreviousStepButtonProps) => {
-  const { onSubmit, action, styles } = props;
+const NextStepButton = (props: NextStepButtonProps) => {
+  const {
+    isInputValidated,
+    onSubmit,
+    caption,
+    activeOpacity,
+    action,
+    styles,
+  } = props
 
-  const [isPressed, setIsPressed] = useState<boolean>(false);
-
-  const onPressInHandler = () => {
-    setIsPressed(true);
-  };
-
-  const onPressOutHandler = () => {
-    setIsPressed(false);
-    onSubmit(action);
-  };
+  const onPressHandler = () => {
+    onSubmit(action)
+  }
 
   return (
     <TouchableOpacity
-      style={[defaultStyle.circle, styles, { backgroundColor: isPressed ? '#FB8F67' : '#FEDED2' }]}
-      onPressIn={onPressInHandler}
-      onPressOut={onPressOutHandler}
-      activeOpacity={1}
+      style={[defaultStyle.button, styles]}
+      onPress={onPressHandler}
+      activeOpacity={activeOpacity}
+      disabled={!isInputValidated}
     >
-      <BackArrowSVG />
+      <Text style={[defaultStyle.btnText, styles]}>{caption}</Text>
     </TouchableOpacity>
-  );
+  )
 }
 
 const defaultStyle = StyleSheet.create({
-  circle: {
-    width: 45,
-    height: 45,
-    borderRadius: 50,
-    paddingTop: 11,
-    paddingLeft: 10,
-    cursor: 'pointer',
+  button: {
+    marginTop: 10,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: 'salmon',
+    width: 300,
+    height: 40,
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  btnText: {
+    fontSize: 18,
+    color: 'salmon',
   },
 })
 
-export default PreviousStepButton;
+export default NextStepButton
