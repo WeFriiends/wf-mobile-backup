@@ -6,7 +6,7 @@ import AddGender from '../../components/profileBuilder/AddGender'
 import AddImages from '../../components/profileBuilder/AddImages'
 import AddLocation from '../../components/profileBuilder/AddLocation'
 import AddName from '../../components/profileBuilder/AddName'
-import AddReason from 'app/components/profileBuilder/AddReason'
+import AddStatus from 'app/components/profileBuilder/AddStatus'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Logo from 'app/public/Logo'
 import { Profile } from 'app/types/Profile'
@@ -26,6 +26,7 @@ const ProfileScreen = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
+    //AsyncStorage.clear()
     getToken()
     getTemporaryProfile()
   }, [])
@@ -51,8 +52,7 @@ const ProfileScreen = () => {
     }
   }
 
-  const saveInput = async (value: string | {}, action: string) => {
-    console.log('value ', value)
+  const saveInput = async (value: string |Array<string> | {}, action: string) => {
     const profileCopy: Profile = profile as Profile
     let profileToSave: Profile = { ...profileCopy, [currentStep.key]: value }
     setProfile(profileToSave)
@@ -60,9 +60,7 @@ const ProfileScreen = () => {
     getNextQuestion(action)
   }
 
-  const mergeItemToAsyncStorage = async (
-    profileToSave: Profile
-  ) => {
+  const mergeItemToAsyncStorage = async (profileToSave: Profile) => {
     await AsyncStorage.setItem(
       'temporaryProfile',
       JSON.stringify(profileToSave),
@@ -146,11 +144,12 @@ const ProfileScreen = () => {
               navigateToPreviousStep={navigateToPreviousStep}
             />
           ) : null}
-          {currentStep.key === 'purpose' ? (
-            <AddReason
+          {currentStep.key === 'status' ? (
+            <AddStatus
               step={currentStep}
               saveInput={saveInput}
               navigateToPreviousStep={navigateToPreviousStep}
+              status={profile?.status as Array<string>}
             />
           ) : null}
           {currentStep.key === 'images' ? (
