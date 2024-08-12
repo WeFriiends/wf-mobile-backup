@@ -4,5 +4,6 @@ export type Profile = {
     dateOfBirth: string,
     gender: string,
     countryCode: string,
-    location: {}
+    location: {},
+    status: Array<string>
 }
