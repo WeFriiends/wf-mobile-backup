@@ -12,6 +12,7 @@ export function UserDetailScreen() {
     <View sx={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <TextLink href="/signIn">👈 Registration screen</TextLink>
       <TextLink href="/user/profile">👈 Go to Profile</TextLink>
+      <TextLink href="/user/search/men">👈 Display men search</TextLink>
     </View>
   )
 }
