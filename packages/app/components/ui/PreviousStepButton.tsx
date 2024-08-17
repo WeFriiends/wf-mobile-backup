@@ -49,6 +49,7 @@ const defaultStyle = StyleSheet.create({
     paddingLeft: 10,
     cursor: 'pointer',
   },
+
 })
 
 export default PreviousStepButton;
