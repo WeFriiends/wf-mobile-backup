@@ -36,8 +36,8 @@ const AddName = (props: AddNameProps) => {
 
 
   //(/^[a-zA-Z\u00C0-\u00FF\u0100-\u017F\u0180-\u024F ']+(?:-[a-zA-Z\u00C0-\u00FF\u0100-\u017F\u0180-\u024F ']+){0,14}$/
-//.test(value))
-  
+  //.test(value))
+
   useEffect(() => {
     if (props.name) {
       setName(props.name)
@@ -50,7 +50,7 @@ const AddName = (props: AddNameProps) => {
     const orientation = await LockOrientation()
     setOrientation(orientation)
   }
-  
+
   const onSubmit = (action: string) => {
     if (NAME_REGEX.test(name.trim() as string)) {
       handlePress(action)
@@ -69,7 +69,7 @@ const AddName = (props: AddNameProps) => {
   }
 
   const handleInput = (value: string) => {
-    if (value.trim().length < 2 ) {
+    if (value.trim().length < 2) {
       setIsInputValidated(false)
       setErrorMessage(INPUT_LENGTH_ERROR_MESSAGE)
     } else if (NAME_REGEX.test(value.trim())) {
@@ -119,11 +119,7 @@ const AddName = (props: AddNameProps) => {
             activeOpacity={1}
             onSubmit={onSubmit}
             action="next"
-            styles={
-              isInputValidated &&
-              nextStepButtonStyle.validatedInput &&
-              nextStepButtonStyle.validatedText
-            }
+            styles={isInputValidated && nextStepButtonStyle.validatedInput}
           />
         </View>
       </View>
@@ -144,36 +140,14 @@ const styles = StyleSheet.create({
   },
   error: {
     width: 300,
-    marginTop:5,
+    marginTop: 5,
   },
 })
 
 const nextStepButtonStyle = StyleSheet.create({
-  validatedText: {
-    fontSize: 18,
-    color: 'salmon',
-  },
   validatedInput: {
     backgroundColor: 'salmon',
     color: 'white',
-    marginTop: 10,
-    borderWidth: 2,
-    borderRadius: 5,
-    borderColor: 'salmon',
-    width: 300,
-    height: 40,
-    alignItems: 'center',
-  },
-})
-
-const prevStepButtonStyle = StyleSheet.create({
-  circle: {
-    width: 45,
-    height: 45,
-    borderRadius: 50,
-    paddingTop: 11,
-    paddingLeft: 10,
-    cursor: 'pointer',
   },
 })
 
