@@ -1,7 +1,6 @@
 import { View } from 'dripsy'
 
 import { TextLink } from 'solito/link'
-import { createParam } from 'solito'
 
 export function UserDetailScreen() {
 
