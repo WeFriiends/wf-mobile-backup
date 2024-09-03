@@ -33,6 +33,8 @@ export function NavigationProvider({
               'user-profile': 'user/profile',
               'user-search': 'user/search/men',
               error: '/error',
+              error400: '/error400',
+              error500: '/error500',
               NotFound: '*', // https://reactnavigation.org/docs/configuring-links/#notfound-screen,
 
             },

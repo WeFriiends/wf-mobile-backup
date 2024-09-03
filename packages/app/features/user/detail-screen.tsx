@@ -10,6 +10,8 @@ export function UserDetailScreen() {
       <TextLink href="/user/profile">👈 Go to Profile</TextLink>
       <TextLink href="/user/search/men">👈 Display men search</TextLink>
       <TextLink href="/error">👈 Error</TextLink>
+      <TextLink href="/error400">👈 Error 400</TextLink>
+      <TextLink href="/error500">👈 Error 500</TextLink>
     </View>
   )
 }
