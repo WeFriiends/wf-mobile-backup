@@ -1,10 +1,11 @@
 import GladScreen from '../../features/registration/glad-screen/GladScreen'
-import { HomeScreen } from '../../features/home/screen'
+import { HomeScreen } from 'app/features/home/screen'
 import MailCreds from '../../features/registration/email/MailCredsContainer'
 import MenSearchScreen from '../../features/search/men-search-screen'
+import ErrorScreen from '../../features/error/ErrorScreen'
 import ProfileScreen from 'app/features/user/profile-screen'
 import RegistrationOptionsScreen from '../../features/registration/RegistrationOptionsScreen'
-import { UserDetailScreen } from '../../features/user/detail-screen'
+import { UserDetailScreen } from 'app/features/user/detail-screen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 export type RootStackParamList = {
@@ -25,6 +26,7 @@ export type RootStackParamList = {
   'user-search': {
     id: string
   }
+  'error': undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -66,7 +68,7 @@ export function NativeNavigation() {
         options={{
           title: 'Glad Screen',
         }}
-       
+
       />
       <Stack.Screen
         name="user-detail"
@@ -88,6 +90,10 @@ export function NativeNavigation() {
         options={{
           title: 'Men Search'
         }}
+      />
+      <Stack.Screen
+        name="error"
+        component={ErrorScreen}
       />
     </Stack.Navigator>
   )

@@ -1,18 +1,16 @@
-import { Text, View } from 'dripsy'
+import { View } from 'dripsy'
 
 import { TextLink } from 'solito/link'
 import { createParam } from 'solito'
 
-const { useParam } = createParam<{ id: string }>()
-
 export function UserDetailScreen() {
-  const [id] = useParam('id')
 
   return (
-    <View sx={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View sx={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: 40 }}>
       <TextLink href="/signIn">👈 Registration screen</TextLink>
       <TextLink href="/user/profile">👈 Go to Profile</TextLink>
       <TextLink href="/user/search/men">👈 Display men search</TextLink>
+      <TextLink href="/error">👈 Error</TextLink>
     </View>
   )
 }

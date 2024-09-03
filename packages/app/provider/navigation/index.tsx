@@ -1,7 +1,6 @@
 import * as Linking from 'expo-linking'
 
 import { NavigationContainer } from '@react-navigation/native'
-import { navigationRef } from '../../../../apps/expo/RootNavigaton';
 import { useMemo } from 'react';
 
 export function NavigationProvider({
@@ -20,7 +19,7 @@ export function NavigationProvider({
             initialRouteName: 'home',
             screens: {
               home: '',
-            
+
               'registration': {
                 path:
                  'registration/:mail-option',
@@ -33,8 +32,9 @@ export function NavigationProvider({
               'user-detail': 'user/:id',
               'user-profile': 'user/profile',
               'user-search': 'user/search/men',
+              error: '/error',
               NotFound: '*', // https://reactnavigation.org/docs/configuring-links/#notfound-screen,
-              
+
             },
           },
         }),
