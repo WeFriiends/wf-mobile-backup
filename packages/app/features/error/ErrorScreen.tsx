@@ -1,8 +1,9 @@
 import {ScrollView, StyleSheet} from 'react-native';
 import {Text, View} from 'dripsy';
 import ErrorSVG from 'app/lib/assets/error/errorSVG';
+import Error400SVG from 'app/lib/assets/error/error400SVG';
+import Error500SVG from 'app/lib/assets/error/error500SVG';
 //todo: research and add import '@expo/match-media'
-//todo: research and add import {useMediaQuery} from 'react-responsive'
 
 type ErrorScreenProps = {
     errorCode?: number;
@@ -14,22 +15,28 @@ const errorData = {
         text: 'Bad Request',
         description: 'Your request could use a quick coffee break.',
         instruction: 'Take a sip, make fixes, and resend!',
+        svg: Error400SVG,
     },
     500: {
         code: 500,
         text: 'Internal Server Error',
         description: 'It seems like something went wrong',
         instruction: "Sorry about that.\n We're trying our best to fix it!",
+        svg: Error500SVG,
     },
     default: {
         text: 'Unable to access the network',
         description: 'Please, check internet connection',
+        svg: ErrorSVG,
     },
 };
 
+
 const ErrorScreen = ({errorCode}: ErrorScreenProps) => {
+    // todo: help somebody, errorCode causes TS2538: Type undefined cannot be used as an index type.
+    // @ts-ignore
     const currentError = errorData[errorCode] || errorData.default;
-    const isDefaultError = currentError === errorData.default;
+    const ErrorIcon = currentError.svg;
 
     return (
         <ScrollView style={styles.commonWrapper}>
@@ -43,13 +50,13 @@ const ErrorScreen = ({errorCode}: ErrorScreenProps) => {
                         </Text>
                     )}
                 </Text>
-                <Text style={[styles.errorDescription, isDefaultError && styles.errorDescriptionNoCode]}>
+                <Text style={[styles.errorDescription, !currentError.code && styles.errorDescriptionNoCode]}>
                     {currentError.text}
                 </Text>
                 <Text style={styles.instruction}>
                     {currentError.description}
                 </Text>
-                <ErrorSVG/>
+                <ErrorIcon/>
                 <Text style={[styles.instruction, styles.pt15]}>
                     {currentError.instruction}
                 </Text>
