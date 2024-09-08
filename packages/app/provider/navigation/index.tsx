@@ -4,8 +4,8 @@ import {NavigationContainer} from '@react-navigation/native'
 import {useMemo} from 'react';
 
 export function NavigationProvider({
-                                     children,
-                                   }: {
+  children,
+}: {
   children: React.ReactNode
 
 }) {
