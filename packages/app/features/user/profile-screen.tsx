@@ -26,7 +26,7 @@ const ProfileScreen = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    //AsyncStorage.clear()
+    //AsyncStorage.clear() - it's here for local development, clearing localStorage to imitate a new user
     getToken()
     getTemporaryProfile()
   }, [])
