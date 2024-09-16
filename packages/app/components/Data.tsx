@@ -1,15 +1,14 @@
-import { Text } from "react-native";
+import { Text } from 'react-native'
 
 type DataProps = {
-    data: string
+  data: string
+  color?: string
 }
 
 const Data = (props: DataProps) => {
-    return (
-        <Text>
-            {props.data}
-        </Text>
-    )
+  return (
+    <Text style={{ color: props.color, fontWeight: 400 }}>{props.data}</Text>
+  )
 }
 
-export default Data;
+export default Data
