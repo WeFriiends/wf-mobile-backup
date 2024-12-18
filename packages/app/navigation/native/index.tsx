@@ -1,11 +1,12 @@
-import GladScreen from '../../features/registration/glad-screen/GladScreen'
-import { HomeScreen } from '../../features/home/screen'
-import MailCreds from '../../features/registration/email/MailCredsContainer'
-import MenSearchScreen from '../../features/search/men-search-screen'
+import GladScreen from 'app/features/registration/glad-screen/GladScreen'
+import {HomeScreen} from 'app/features/home/screen'
+import MailCreds from 'app/features/registration/email/MailCredsContainer'
+import MenSearchScreen from 'app/features/search/men-search-screen'
+import ErrorScreen from 'app/features/error/ErrorScreen'
 import ProfileScreen from 'app/features/user/profile-screen'
-import RegistrationOptionsScreen from '../../features/registration/RegistrationOptionsScreen'
-import { UserDetailScreen } from '../../features/user/detail-screen'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import RegistrationOptionsScreen from 'app/features/registration/RegistrationOptionsScreen'
+import {UserDetailScreen} from 'app/features/user/detail-screen'
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
 export type RootStackParamList = {
   home: undefined
@@ -25,6 +26,9 @@ export type RootStackParamList = {
   'user-search': {
     id: string
   }
+  'error': undefined
+  'error400': undefined
+  'error500': undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -66,7 +70,7 @@ export function NativeNavigation() {
         options={{
           title: 'Glad Screen',
         }}
-       
+
       />
       <Stack.Screen
         name="user-detail"
@@ -89,6 +93,16 @@ export function NativeNavigation() {
           title: 'Men Search'
         }}
       />
+      <Stack.Screen
+        name="error"
+        component={ErrorScreen}
+      />
+      <Stack.Screen name="error400">
+        {props => <ErrorScreen errorCode={400} {...props}/>}
+      </Stack.Screen>
+      <Stack.Screen name="error500">
+        {props => <ErrorScreen errorCode={500} {...props}/>}
+      </Stack.Screen>
     </Stack.Navigator>
   )
 }
